@@ -27,11 +27,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Lint Project
-        run: npm run lint
-
       - name: Install Dependencies
         run: npm install
+
+      - name: Lint Project
+        run: npm run lint
 
       - name: Build Project
         run: npm run build
