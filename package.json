@@ -1,5 +1,21 @@
 {
+  "name": "tdesign-mobile-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.3.4"
+  },
   "devDependencies": {
-    "postcss-pxtorem": "^6.0.0"
+    "@vitejs/plugin-vue": "^4.2.3",
+    "husky": "^8.0.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.0",
+    "vue-tsc": "^1.8.3"
   }
 }
