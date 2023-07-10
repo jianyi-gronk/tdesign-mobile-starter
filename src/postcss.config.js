@@ -7,7 +7,7 @@ export default {
       selectorBlackList: [],
       replace: true,
       mediaQuery: false,
-      minPixelValue: 12,
-    },
-  },
+      minPixelValue: 12
+    }
+  }
 };
