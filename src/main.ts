@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import TDesign from 'tdesign-mobile-vue';
 import './style.css';
 import App from './App.vue';
 
@@ -13,5 +14,6 @@ setRem();
 window.onresize = () => {
   setRem();
 };
-
-createApp(App).mount('#app');
+const app = createApp(App);
+app.use(TDesign);
+app.mount('#app');
