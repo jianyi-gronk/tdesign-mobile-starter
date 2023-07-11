@@ -65,7 +65,7 @@ const list = ref([
   { value: 'label_2', label: '我的', icon: 'user', path: '/user' }
 ]);
 </script>
-<style lang="less">
+<style lang="less" scoped>
 * {
   margin: 0;
   padding: 0;
