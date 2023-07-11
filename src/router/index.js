@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../pages/home/index.vue';
 import User from '../pages/home/user/MyManagement.vue';
-import dateSelection from '../pages/dateSelection/index.vue'
+import dateSelection from '../pages/dateSelection/index.vue';
 import ApplicantInformation from '../pages/applicant_information/index.vue';
 
 const routes = [
@@ -21,9 +21,9 @@ const routes = [
     component: ApplicantInformation
   },
   {
-    path:'/dateSelection',
-    name:'dateSelection',
-    component:dateSelection
+    path: '/dateSelection',
+    name: 'dateSelection',
+    component: dateSelection
   }
 ];
 
