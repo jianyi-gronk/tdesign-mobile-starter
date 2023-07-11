@@ -1,9 +1,12 @@
 <template>
-  <Home />
+  <!-- <Home /> -->
+  <RouterView></RouterView>
 </template>
 
 <script setup lang="ts">
-import Home from './pages/home/index.vue';
+import { RouterView } from 'vue-router';
+
+// import Home from './pages/home/index.vue';
 </script>
 
 <style scoped lang="less">
