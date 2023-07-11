@@ -17,12 +17,8 @@
         </t-cell>
       </div>
       <div class="name input_item">
-        <t-input
-          label="姓名 *"
-          placeholder="请输入您的姓名"
-          required: true
-          defaultValue="蔡宣轩"
-        ></t-input>
+        <t-input label="姓名 *" placeholder="请输入您的姓名" required: true
+        defaultValue="蔡宣轩" />
       </div>
       <div class="birthday input_item">
         <t-input
@@ -30,7 +26,6 @@
           placeholder="请输入您的生日"
           :value="pickerBirthdayValueText"
           @click="visibleBirthday = true"
-          
         >
           <template #suffixIcon>
             <CalendarIcon />
@@ -69,7 +64,11 @@
         ></t-input>
       </div>
       <div class="email input_item">
-        <t-input label="邮箱" placeholder="请输入您的邮箱" defaultValue=""></t-input>
+        <t-input
+          label="邮箱"
+          placeholder="请输入您的邮箱"
+          defaultValue=""
+        ></t-input>
       </div>
       <div class="career input_item">
         <t-input
@@ -141,30 +140,30 @@ const careerOptions = [
   [
     {
       label: '学生',
-      value: '学生',
+      value: '学生'
     },
     {
       label: '计算机从业者',
-      value: '计算机从业者',
+      value: '计算机从业者'
     },
     {
       label: '设计师/艺术从业者',
-      value: '设计师/艺术从业者',
+      value: '设计师/艺术从业者'
     },
     {
       label: '医务人员',
-      value: '医务人员',
+      value: '医务人员'
     },
     {
       label: '自由职业者',
-      value: '自由职业者',
-    },
-  ],
+      value: '自由职业者'
+    }
+  ]
 ];
 
 const careerState = reactive({
   show: false,
-  career: [],
+  career: []
 });
 
 const onConfirmCareer = (val: string[], context: number[]) => {
@@ -173,7 +172,7 @@ const onConfirmCareer = (val: string[], context: number[]) => {
   careerState.show = false;
 };
 
-const onPickCareer = (value: String, context: any) => {
+const onPickCareer = (value: any, context: any) => {
   console.log('pick value', value);
   console.log('context', context);
 };
@@ -200,7 +199,6 @@ const onPickCareer = (value: String, context: any) => {
         padding: 0 0.4267rem;
       }
       //   --td-cell-vertical-padding: 0.4267rem 0;
-      
     }
     .input_item {
       --td-input-vertical-padding: 0.4267rem 0.4267rem;

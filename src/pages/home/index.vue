@@ -62,7 +62,7 @@ const onChange = (val: string) => {
 const value_ = ref('label_1');
 const list = ref([
   { value: 'label_1', label: '首页', icon: 'home', path: '/' },
-  { value: 'label_2', label: '我的', icon: 'user', path: '/user' },
+  { value: 'label_2', label: '我的', icon: 'user', path: '/user' }
 ]);
 </script>
 <style lang="less">
