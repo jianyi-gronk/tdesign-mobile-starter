@@ -1,16 +1,29 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../pages/home/index.vue';
+import User from '../pages/home/user/MyManagement.vue';
+import ApplicantInformation from '../pages/applicant_information/index.vue';
 
-let routes = [
+const routes = [
   {
-    name: 'applicant_information',
-    path: '/applicant_information',
-    component: () => import('../pages/applicant_information/index.vue'),
+    path: '/',
+    name: 'Home',
+    component: Home
   },
+  {
+    path: '/user',
+    name: 'User',
+    component: User
+  },
+  {
+    path: '/applicant_information',
+    name: 'ApplicantInformation',
+    component: ApplicantInformation
+  }
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes,
+  history: createWebHistory(process.env.BASE_URL),
+  routes
 });
 
 export default router;
