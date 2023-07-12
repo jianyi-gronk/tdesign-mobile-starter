@@ -167,7 +167,7 @@ const list = [
     children: ['昆明', '开封', '康定', '喀什']
   }
 ];
-const indexList = list.map((item) => item.index);
+// const indexList = list.map((item) => item.index);
 </script>
 <style scoped lang="less">
 .location {
