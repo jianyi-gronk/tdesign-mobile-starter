@@ -74,10 +74,6 @@ const onChange = (val: string) => {
   console.log('change: ', val);
 };
 
-const value = ref('');
-</script>
-
-<style lang="less" scoped>
 .热门推荐 {
   width: 80px;
   height: 28px;
