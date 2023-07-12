@@ -58,14 +58,14 @@ import { Icon as TIcon } from 'tdesign-icons-vue-next';
 const onChange = (val: string) => {
   console.log('change: ', val);
 };
-
+const value = ref('');
 const value_ = ref('label_1');
 const list = ref([
   { value: 'label_1', label: '首页', icon: 'home', path: '/' },
   { value: 'label_2', label: '我的', icon: 'user', path: '/user' }
 ]);
 </script>
-<style lang="less">
+<style lang="less" scoped>
 * {
   margin: 0;
   padding: 0;
