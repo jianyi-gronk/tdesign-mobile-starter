@@ -54,12 +54,142 @@
             </t-tab-panel>
           </t-tabs>
         </div>
-        <!-- <div class="filter">
+        <div class="filter" @click="visible = true">
           <div class="filter_">
             <icon-font name="filter" size="large" />
             <span style="font-size: 0.3733rem">筛选</span>
+            <t-popup v-model="visible" placement="bottom" style="padding: 10px" :closeBtn="true">
+              <div class="fil_header">全部筛选</div>
+              <div class="fil_content">
+                <div class="fil_item">
+                  <div class="item_title">面向领域</div>
+                  <div class="item_tag">
+                    <t-check-tag
+                      variant="light-outline"
+                      size="large"
+                      :content="['IT互联网', 'IT互联网']"
+                      shape="round"
+                      class="tag"
+                    />
+                    <t-check-tag
+                      variant="light-outline"
+                      size="large"
+                      :content="['艺术设计', '艺术设计']"
+                      shape="round"
+                      class="tag"
+                    />
+                    <t-check-tag
+                      variant="light-outline"
+                      size="large"
+                      :content="['科技', '科技']"
+                      shape="round"
+                      class="tag"
+                    />
+                    <t-check-tag
+                      variant="light-outline"
+                      size="large"
+                      :content="['电商', '电商']"
+                      shape="round"
+                      class="tag"
+                    />
+                    <t-check-tag
+                      variant="light-outline"
+                      size="large"
+                      :content="['教育', '教育']"
+                      shape="round"
+                      class="tag"
+                    />
+                    <t-check-tag
+                      variant="light-outline"
+                      size="large"
+                      :content="['医疗健康', '医疗健康']"
+                      shape="round"
+                      class="tag"
+                    />
+                    <t-check-tag
+                      variant="light-outline"
+                      size="large"
+                      :content="['心理学', '心理学']"
+                      shape="round"
+                      class="tag"
+                    />
+                    <t-check-tag
+                      variant="light-outline"
+                      size="large"
+                      :content="['摄影', '摄影']"
+                      shape="round"
+                      class="tag"
+                    />
+                  </div>
+                </div>
+                <div class="fil_item">
+                  <div class="item_title">活动形式</div>
+                  <div class="item_tag">
+                    <t-check-tag
+                      variant="light-outline"
+                      size="large"
+                      :content="['讲座', '讲座']"
+                      shape="round"
+                      class="tag"
+                    />
+                    <t-check-tag
+                      variant="light-outline"
+                      size="large"
+                      :content="['展览', '展览']"
+                      shape="round"
+                      class="tag"
+                    />
+                    <t-check-tag
+                      variant="light-outline"
+                      size="large"
+                      :content="['工作坊', '工作坊']"
+                      shape="round"
+                      class="tag"
+                    />
+                  </div>
+                </div>
+                <div class="fil_item">
+                  <div class="item_title">活动日期</div>
+                  <div class="item_choose" style="font-size: 14px">
+                    <t-calendar
+                      v-model:visible="date_visible"
+                      :value="date_value"
+                      type="range"
+                      @confirm="handleConfirm"
+                    ></t-calendar>
+                    <t-input v-model="date"></t-input>
+                    <t-button theme="primary" variant="text" @click="date_visible=true">选择日期</t-button>
+                  </div>
+                </div>
+                <div class="fil_item">
+                  <div class="item_title">价格范围(元)</div>
+                  <div class="item_content" style="margin-top: 10px;">
+                    <t-slider
+                      range
+                      :default-value="[30, 50]"
+                      :label="true"
+                      show-extreme-value
+                      max="588"
+                      min="0"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="fil_footer">
+                <div class="btn btn--cancel" aria-role="button" @click="onReset">
+                  重置
+                </div>
+                <div
+                  class="btn btn--confirm"
+                  aria-role="button"
+                  @click="onComplete"
+                >
+                  完成
+                </div>
+              </div>
+            </t-popup> 
           </div>
-        </div> -->
+        </div>
       </div>
       <div class="other-content" v-for="i in 50" :key="i"></div>
     </div>
@@ -69,11 +199,40 @@
 <script lang="ts" setup>
 import { IconFont } from 'tdesign-icons-vue-next';
 import { ref } from 'vue';
+import moment from 'moment';
+const visible = ref<boolean>(false);
+let date = ref<string>('2023年3月10日-3月16日');
+// 区间选择日期
+let date_visible = ref(false);
+const today = new Date();
+const tomorrow = new Date(today.getTime() + 5 * 24 * 3600 * 1000);
+const date_value = ref([today, tomorrow]);
+const handleConfirm = (val) => {
+  let y1 = moment(val[0]).format('YYYY');
+  let y2 = moment(val[1]).format('YYYY');
+  if (y1 == y2) {
+    date.value =
+      moment(val[0]).format('YYYY年M月D日') +
+      '-' +
+      moment(val[1]).format('M月D日');
+  } else {
+    date.value =
+      moment(val[0]).format('YYYY年M月D日') +
+      '-' +
+      moment(val[1]).format('YYYY年M月D日');
+  }
+};
+// 筛选重置按钮函数
+const onReset = () => {};
+// 筛选完成按钮函数
+const onComplete = () => {};
 
 const onChange = (val: string) => {
   console.log('change: ', val);
 };
-
+</script>
+<style lang="less" scoped>
+  
 .热门推荐 {
   width: 80px;
   height: 28px;
@@ -197,8 +356,9 @@ const onChange = (val: string) => {
   height: 1.28rem;
   position: absolute;
   margin-left: 6.6667rem;
-  margin-top: 11.7067rem;
-  //border-left: 1px solid #e7e7e7ff;
+  /* margin-top: 11.7067rem; */
+  margin-bottom: 10px;
+  border-left: 1px solid #e7e7e7ff;
   border-bottom: 0.5px solid #e7e7e7ff;
 }
 .filter_ {
@@ -209,4 +369,75 @@ const onChange = (val: string) => {
   align-items: center;
   border-left: 1px solid #e7e7e7ff;
 }
+.fil_header {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.fil_content {
+  margin-top: 10px;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  .fil_item {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    .item_choose{
+      display: flex;
+      padding: 0 10px;
+      align-items: center;
+    }
+    .item_title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .item_tag {
+      width: 100%;
+      margin-bottom: 10px;
+      .tag {
+        width: 30%;
+        text-align: center;
+        margin: 0 5px;
+        display: inline-block;
+        height: 30px;
+        line-height: 30px;
+        margin-bottom: 13px;
+      }
+    }
+    .item_content{
+      margin-bottom: 15px;
+    }
+  }
+}
+.fil_footer {
+  display: flex;
+  justify-content: space-evenly;
+}
+.btn {
+  font-size: 14px;
+  padding: 10px;
+  margin: 15px 0;
+}
+
+.btn--cancel {
+  color: #0052d9;
+  border-radius: 5px;
+  width: 35%;
+  text-align: center;
+}
+
+.btn--confirm {
+  color: white;
+  background-color: #0052d9;
+  border-radius: 5px;
+  width: 35%;
+  text-align: center;
+}
+
 </style>
