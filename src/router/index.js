@@ -4,7 +4,7 @@ import User from '../pages/home/user/MyManagement.vue';
 import dateSelection from '../pages/dateSelection/index.vue';
 import regionSelection from '../pages/regionSelection/index.vue';
 import ApplicantInformation from '../pages/applicant_information/index.vue';
-import purchaseResult from '../pages/purchaseResults/index.vue';
+import purchaseResult from '../pages/purchaseResult/index.vue';
 
 const routes = [
   {
