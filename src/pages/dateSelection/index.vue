@@ -18,6 +18,7 @@
         title="选择日期"
         confirmBtn="确认日期"
         @confirm="handleConfirm"
+        @close="visible = false"
       ></t-calendar>
       <t-cell
         title="区间选择日期"
@@ -35,6 +36,7 @@ import { ref } from 'vue';
 
 const visible = ref(true);
 const handleConfirm = (val: string) => {
+  visible.value = false;
   console.log(val);
 };
 const today = new Date();
@@ -55,7 +57,7 @@ const valueSearch = ref('');
 .example-search {
   background-color: #fff;
   padding: 6px 16px;
-  margin-top: 0.5333rem;
+  // margin-top: 0.5333rem;
 }
 .calendar {
   margin-top: 2.1333rem;
