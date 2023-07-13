@@ -55,7 +55,7 @@ const onCancelBirthday = () => {
 };
 
 const emit = defineEmits<{
-  (event: 'confirmBirthday', value: String): void;
+  (event: 'confirmBirthday', value: string): void;
 }>();
 
 const onConfirmBirthday = (value: string) => {
