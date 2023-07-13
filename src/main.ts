@@ -1,6 +1,9 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
+import TDesign from 'tdesign-mobile-vue';
+import 'tdesign-mobile-vue/es/style/index.css';
+import router from './router'
 
 const setRem = () => {
     const html = document.querySelector('html')!;
@@ -14,4 +17,4 @@ window.onresize = () => {
     setRem();
 };
 
-createApp(App).mount('#app')
+createApp(App).use(router).use(TDesign).mount('#app')
