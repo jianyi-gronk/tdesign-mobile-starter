@@ -61,10 +61,11 @@ const careerState = reactive({
   career: []
 });
 
-const onConfirmCareer = (val: string[], context: number[]) => {
-  console.log(val);
-  console.log('context', context);
+const emit = defineEmits<{ (event: 'confirmCareer', value: String) }>();
+
+const onConfirmCareer = (val: string) => {
   careerState.show = false;
+  emit('confirmCareer', val);
 };
 
 const onPickCareer = (value: any, context: any) => {

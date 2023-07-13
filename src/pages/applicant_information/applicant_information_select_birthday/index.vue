@@ -1,4 +1,5 @@
 <template>
+  <!-- 选择生日 -->
   <div class="birthday input_item">
     <t-input
       label="生日 *"
@@ -33,11 +34,13 @@
 <script setup lang="ts">
 import { CalendarIcon } from 'tdesign-icons-vue-next';
 import { ref } from 'vue';
+
 //选择生日
 const visibleBirthday = ref(false);
 const pickerBirthdayValue = ref('2000-1-1');
 const pickerBirthdayValueText = ref('');
 const today = new Date();
+
 const onChangeBirthday = (value: string) => {
   console.log('change: ', value);
 };
@@ -51,11 +54,15 @@ const onCancelBirthday = () => {
   visibleBirthday.value = false;
 };
 
+const emit = defineEmits<{
+  (event: 'confirmBirthday', value: String): void;
+}>();
+
 const onConfirmBirthday = (value: string) => {
-  console.log('confirm: ', value);
   pickerBirthdayValue.value = value;
   pickerBirthdayValueText.value = value;
   visibleBirthday.value = false;
+  emit('confirmBirthday', value);
 };
 </script>
 
