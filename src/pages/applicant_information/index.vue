@@ -1,51 +1,66 @@
 <template>
   <div class="all">
+    <!-- 个人信息页面头部 -->
     <div class="header">
       <t-navbar
         title="个人信息"
         :fixed="true"
         left-arrow
-        @left-click="handleClick"
+        @left-click="handleReturnClick"
       />
     </div>
+    <!-- 主要信息模块 -->
     <div class="contain">
+      <!-- 将该个人信息设置为默认信息 -->
       <div class="default_setting">
         <t-cell title="设为默认" hover>
           <template #note>
-            <t-switch :default-value="true" />
+            <t-switch
+              :default-value="personalInfo.defaultState"
+              @click="changeDefaultState"
+            />
           </template>
         </t-cell>
       </div>
-      <div class="name input_item">
-        <t-input label="姓名 *" placeholder="请输入您的姓名" required: true
-        defaultValue="蔡宣轩" />
+      <!-- 输入姓名 -->
+      <div class="input_item">
+        <t-input label="姓名 *" v-model="personalInfo.name"
+        placeholder="请输入您的姓名" required: true />
       </div>
-      <SelectBirthday></SelectBirthday>
-      <div class="phone input_item">
+      <!-- 选择生日 -->
+      <SelectBirthday @confirmBirthday="addBirthday"></SelectBirthday>
+      <!-- 输入手机号 -->
+      <div class="input_item">
         <t-input
           label="手机号 *"
           placeholder="请输入您的手机号"
-          defaultValue="18888888888"
+          v-model="personalInfo.phone"
         ></t-input>
       </div>
-      <div class="id_card input_item">
+      <!-- 输入身份证 -->
+      <div class="input_item">
         <t-input
           label="身份证 *"
           placeholder="请输入您的身份证"
-          defaultValue=""
+          v-model="personalInfo.idCard"
         ></t-input>
       </div>
-      <div class="email input_item">
+      <!-- 输入邮箱 -->
+      <div class="input_item">
         <t-input
           label="邮箱"
           placeholder="请输入您的邮箱"
-          defaultValue=""
+          v-model="personalInfo.email"
         ></t-input>
       </div>
-      <SelectCareer></SelectCareer>
+      <!-- 选择职业 -->
+      <SelectCareer @confirmCareer="addCareer"></SelectCareer>
     </div>
+    <!-- 确认提交个人信息按钮 -->
     <div class="row">
-      <t-button size="large" theme="primary" block>确定</t-button>
+      <t-button size="large" theme="primary" block @click="submitInfo"
+        >确定</t-button
+      >
     </div>
   </div>
 </template>
@@ -53,10 +68,42 @@
 <script setup lang="ts">
 import SelectBirthday from './applicant_information_select_birthday/index.vue';
 import SelectCareer from './applicant_information_select_career/index.vue';
+import { reactive } from 'vue';
 
-//设为默认
-const handleClick = () => {
-  console.log('left-click');
+// 个人信息
+const personalInfo = reactive({
+  defaultState: true,
+  name: '',
+  birthday: '',
+  phone: '',
+  idCard: '',
+  email: '',
+  career: ''
+});
+
+// 返回按钮事件
+const handleReturnClick = () => {
+  console.log('返回按钮事件');
+};
+
+// 改变默认设置事件
+const changeDefaultState = () => {
+  personalInfo.defaultState = !personalInfo.defaultState;
+};
+
+// 保存选择生日子组件传来的值
+const addBirthday = (value: any) => {
+  personalInfo.birthday = value;
+};
+
+// 保存选择职业子组件传来的值
+const addCareer = (value: any) => {
+  personalInfo.career = value;
+};
+
+// 提交信息事件
+const submitInfo = () => {
+  console.log(personalInfo);
 };
 </script>
 
