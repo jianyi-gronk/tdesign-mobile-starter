@@ -6,10 +6,22 @@
                 @change="onChange"></t-search>
         </div>
         <div class="calendar">
-            <t-calendar v-model:visible="visible" :value="value" type="range" title="选择日期" confirmBtn="确认日期"
-                @confirm="handleConfirm"></t-calendar>
-            <t-cell title="区间选择日期" arrow @click="visible = true" class="controllDate"></t-cell>
-        </div>
+            <t-calendar
+              v-model:visible="visible"
+              :value="value"
+              type="range"
+              title="选择日期"
+              confirmBtn="确认日期"
+              @confirm="handleConfirm"
+              @close="visible = false"
+            ></t-calendar>
+            <t-cell
+              title="区间选择日期"
+              arrow
+              @click="visible = true"
+              class="controllDate"
+            ></t-cell>
+    </div>
     </div>
 </template>
 
@@ -19,7 +31,8 @@ import { ref } from 'vue';
 
 const visible = ref(true);
 const handleConfirm = (val: string) => {
-    console.log(val);
+  visible.value = false;
+  console.log(val);
 };
 const today = new Date();
 const tomorrow = new Date(today.getTime() + 5 * 24 * 3600 * 1000);
@@ -38,9 +51,9 @@ const valueSearch = ref('');
 }
 
 .example-search {
-    background-color: #fff;
-    padding: 6px 16px;
-    margin-top: 0.5333rem;
+  background-color: #fff;
+  padding: 6px 16px;
+  // margin-top: 0.5333rem;
 }
 
 .calendar {
