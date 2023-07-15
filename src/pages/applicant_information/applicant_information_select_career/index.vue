@@ -30,7 +30,7 @@
 import { ChevronRightIcon } from 'tdesign-icons-vue-next';
 import { reactive } from 'vue';
 
-//选择职业
+//职业选项列表
 const careerOptions = [
   [
     {
@@ -56,11 +56,13 @@ const careerOptions = [
   ]
 ];
 
+//选择职业框显示状态
 const careerState = reactive({
   show: false,
   career: []
 });
 
+//向父组件传值
 const emit = defineEmits<{ (event: 'confirmCareer', value: string): void }>();
 
 const onConfirmCareer = (val: string) => {
@@ -68,6 +70,7 @@ const onConfirmCareer = (val: string) => {
   emit('confirmCareer', val);
 };
 
+//选择职业
 const onPickCareer = (value: any, context: any) => {
   console.log('pick value', value);
   console.log('context', context);
