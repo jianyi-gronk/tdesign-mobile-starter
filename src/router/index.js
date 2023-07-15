@@ -5,6 +5,7 @@ import dateSelection from '../pages/dateSelection/index.vue';
 import regionSelection from '../pages/regionSelection/index.vue';
 import ApplicantInformation from '../pages/applicant_information/index.vue';
 import purchaseResult from '../pages/purchaseResult/index.vue';
+import Admin  from '../pages/admin/index.vue'
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/purchaseResult',
     name: 'purchaseResult',
     component: purchaseResult
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: Admin
   }
 ];
 

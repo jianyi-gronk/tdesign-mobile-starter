@@ -4,6 +4,8 @@ import TDesign from 'tdesign-mobile-vue';
 import './styles/reset.css'
 import App from './App.vue';
 import router from './router';
+// 引入组件库的少量全局样式变量
+
 import 'tdesign-mobile-vue/es/style/index.css';
 
 const setRem = () => {
@@ -17,7 +19,6 @@ setRem();
 window.onresize = () => {
   setRem();
 };
-
 const app = createApp(App);
 
 app.use(router);
