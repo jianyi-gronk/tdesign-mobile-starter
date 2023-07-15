@@ -121,6 +121,7 @@ import HighScoreActivity from './HighScoreActivities.vue';
 //   console.log('change: ', val);
 // };
 
+<<<<<<< HEAD
 const value = ref('');
 
 const imageCdn = 'https://tdesign.gtimg.com/miniprogram/images';
@@ -168,6 +169,8 @@ img {
   height: 192px;
 }
 
+=======
+>>>>>>> fd8b82895005ccfbd827fff1b0031420cc2974a2
 .热门推荐 {
   width: 80px;
   height: 28px;
