@@ -3,8 +3,12 @@ import TDesign from 'tdesign-mobile-vue';
 // import './style.css';
 import './styles/reset.css'
 import App from './App.vue';
+<<<<<<< HEAD
+import router from './router/index';
+=======
 import router from './router';
 import 'tdesign-mobile-vue/es/style/index.css';
+>>>>>>> fd8b82895005ccfbd827fff1b0031420cc2974a2
 
 const setRem = () => {
   const html = document.querySelector('html')!;
@@ -19,7 +23,10 @@ window.onresize = () => {
 };
 
 const app = createApp(App);
+<<<<<<< HEAD
+=======
 
+>>>>>>> fd8b82895005ccfbd827fff1b0031420cc2974a2
 app.use(router);
 app.use(TDesign);
 
