@@ -11,7 +11,7 @@
     "lint-fix": "eslint --fix --ext .js,.vue src"
   },
   "dependencies": {
-    "vue-router": "^4.0.13",
+    "moment": "^2.29.4",
     "tdesign-icons-vue-next": "^0.1.11",
     "tdesign-mobile-vue": "^1.0.0-rc.1",
     "vue": "^3.3.4",
