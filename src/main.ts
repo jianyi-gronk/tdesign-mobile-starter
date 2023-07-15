@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import TDesign from 'tdesign-mobile-vue';
 // import './style.css';
-import './styles/reset.css'
+import './styles/reset.css';
 import App from './App.vue';
 import router from './router';
 import 'tdesign-mobile-vue/es/style/index.css';
@@ -19,7 +19,6 @@ window.onresize = () => {
 };
 
 const app = createApp(App);
-
 app.use(router);
 app.use(TDesign);
 
