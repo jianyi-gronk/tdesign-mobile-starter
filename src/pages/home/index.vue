@@ -33,6 +33,23 @@
     >
       热门推荐
     </div>
+
+    <!-- <div style="padding: 0 16px">
+      <t-swiper
+        :navigation="{ type: 'dots' }"
+        :autoplay="false"
+        @change="handleChange"
+      >
+        <t-swiper-item
+          v-for="(item, index) in swiperList"
+          :key="index"
+          style="height: 192px"
+        >
+          <img :src="item" class="img" />
+        </t-swiper-item>
+      </t-swiper>
+    </div> -->
+
     <div class="container">
       <div class="placeholder"></div>
       <div class="sticky">
@@ -40,21 +57,25 @@
       </div>
       <div class="sticky_">
         <div class="demo-tab-bar" style="width: 250px">
-          <t-tabs default-value="first">
+          <t-tabs default-value="first" @change="switchTab">
             <t-tab-panel value="first">
               <template #label>
                 <div class="label-content">
-                  <!-- <icon-font name="app" size="large" /> -->
                   <span>最新活动</span>
                 </div>
+              </template>
+              <template #default>
+                <LatestActivity v-if="currentTab === 'first'" />
               </template>
             </t-tab-panel>
             <t-tab-panel value="second">
               <template #label>
                 <div class="label-content">
-                  <!-- <icon-font name="app" size="large" /> -->
                   <span>高分活动</span>
                 </div>
+              </template>
+              <template #default>
+                <HighScoreActivity v-if="currentTab === 'second'" />
               </template>
             </t-tab-panel>
           </t-tabs>
@@ -212,55 +233,92 @@
       </div>
       <div class="other-content" v-for="i in 50" :key="i"></div>
     </div>
+    <t-tab-bar
+      class="bottom-tab-bar"
+      v-model="tabValue"
+      theme="tag"
+      :split="false"
+    >
+      <t-tab-bar-item
+        v-for="item in tabList"
+        :key="item.value"
+        :value="item.value"
+        @click="handleTabClick(item.value)"
+      >
+        {{ item.label }}
+        <template #icon>
+          <t-icon :name="item.icon" />
+        </template>
+      </t-tab-bar-item>
+    </t-tab-bar>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { IconFont } from 'tdesign-icons-vue-next';
 import { ref } from 'vue';
-import moment from 'moment';
-const visible = ref<boolean>(false);
-let date = ref<string>('2023年3月10日-3月16日');
-// 区间选择日期
-let date_visible = ref(false);
-const today = new Date();
-const tomorrow = new Date(today.getTime() + 5 * 24 * 3600 * 1000);
-const date_value = ref([today, tomorrow]);
-const handleConfirm = (val) => {
-  let y1 = moment(val[0]).format('YYYY');
-  let y2 = moment(val[1]).format('YYYY');
-  if (y1 == y2) {
-    date.value =
-      moment(val[0]).format('YYYY年M月D日') +
-      '-' +
-      moment(val[1]).format('M月D日');
-  } else {
-    date.value =
-      moment(val[0]).format('YYYY年M月D日') +
-      '-' +
-      moment(val[1]).format('YYYY年M月D日');
+
+
+const value = ref('');
+
+const imageCdn = 'https://tdesign.gtimg.com/miniprogram/images';
+const swiperList = [
+  `${imageCdn}/swiper1.png`,
+  `${imageCdn}/swiper2.png`,
+  `${imageCdn}/swiper1.png`,
+  `${imageCdn}/swiper2.png`,
+  `${imageCdn}/swiper1.png`
+];
+//标签栏
+const tabValue = ref('label_1');
+const tabList = ref([
+  { value: 'label_1', label: '首页', icon: 'home', path: '/' },
+  { value: 'label_2', label: '我的', icon: 'user', path: '/my' }
+]);
+//标签栏跳转
+const router = useRouter();
+const handleTabClick = (value: string) => {
+  if (value === 'label_1') {
+    router.push('/');
+    //console.log('1')
+  } else if (value === 'label_2') {
+    router.push('/my');
+    //console.log('2')
   }
 };
-// 筛选重置按钮函数
-const onReset = () => {};
-// 筛选完成按钮函数
-const onComplete = () => {};
 
-const onChange = (val: string) => {
-  console.log('change: ', val);
+//活动跳转
+const currentTab = ref('first');
+const switchTab = (value: string) => {
+  currentTab.value = value;
 };
 </script>
-<style>
+
+<style lang="less" scoped>
+.bottom-tab-bar {
+  position: fixed;
+  bottom: 24px;
+  width: 100%;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 192px;
+}
+
+
 .热门推荐 {
-    width: 80px;
-    height: 28px;
-    opacity: 1;
-    color: #000000e6;
-    font-size: 20px;
-    font-weight: 600;
-    font-family: "PingFang SC";
-    text-align: left;
-    line-height: 28px;
+  width: 80px;
+  height: 28px;
+  opacity: 1;
+  color: #000000e6;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'PingFang SC';
+  text-align: left;
+  line-height: 28px;
+
 }
 
 .header {
@@ -346,16 +404,20 @@ const onChange = (val: string) => {
 }
 
 .sticky-content {
-    padding-left: 16px;
-    box-sizing: border-box;
-    height: 28px;
-    opacity: 1;
-    color: #000000e6;
-    font-size: 20px;
-    font-weight: 600;
-    font-family: 'PingFang SC';
-    text-align: left;
-    line-height: 28px;
+
+  width: 100%;
+  background: #fff;
+  padding-left: 16px;
+  box-sizing: border-box;
+  height: 28px;
+  opacity: 1;
+  color: #000000e6;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'PingFang SC';
+  text-align: left;
+  line-height: 28px;
+
 }
 
 .other-content {
