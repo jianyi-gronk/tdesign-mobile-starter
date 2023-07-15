@@ -64,6 +64,15 @@ const onConfirmBirthday = (value: string) => {
   visibleBirthday.value = false;
   emit('confirmBirthday', value);
 };
+
+// 未选择生日，打开生日选择器
+const setVisibleBirthday = (value: boolean) => {
+  visibleBirthday.value = value;
+};
+
+defineExpose({
+  setVisibleBirthday
+});
 </script>
 
 <style scoped>
