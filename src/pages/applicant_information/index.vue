@@ -194,6 +194,7 @@ const checkIdCard = () => {
     height: 1.28rem;
   }
   .contain {
+    margin-top: 1.28rem;
     font-size: 0.4267rem;
     color: #000000;
     font-weight: 400;
