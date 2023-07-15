@@ -61,7 +61,7 @@ const careerState = reactive({
   career: []
 });
 
-const emit = defineEmits<{ (event: 'confirmCareer', value: string) }>();
+const emit = defineEmits<{ (event: 'confirmCareer', value: string): void }>();
 
 const onConfirmCareer = (val: string) => {
   careerState.show = false;

@@ -39,6 +39,8 @@
       </t-button>
       <t-button class="check-btn" size="large" theme="primary">去查看</t-button>
     </div>
+
+    <div class="cover"></div>
   </div>
 </template>
 
@@ -213,5 +215,15 @@ const index: Ref<number | string> = ref('');
       height: 48px;
     }
   }
+}
+
+.cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  background: #00000099;
 }
 </style>

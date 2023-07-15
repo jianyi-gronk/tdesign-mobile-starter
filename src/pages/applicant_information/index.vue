@@ -23,26 +23,37 @@
         </t-cell>
       </div>
       <!-- 输入姓名 -->
-      <div class="input_item">
-        <t-input label="姓名 *" v-model="personalInfo.name"
-        placeholder="请输入您的姓名" required: true />
+      <div class="name input_item myRequired">
+        <t-input
+          label="姓名 "
+          v-model="personalInfo.name"
+          placeholder="请输入您的姓名"
+          ref="nameRef"
+        />
       </div>
       <!-- 选择生日 -->
-      <SelectBirthday @confirmBirthday="addBirthday"></SelectBirthday>
+      <SelectBirthday
+        @confirmBirthday="addBirthday"
+        ref="birthdayRef"
+      ></SelectBirthday>
       <!-- 输入手机号 -->
-      <div class="input_item">
+      <div class="phone input_item myRequired">
         <t-input
-          label="手机号 *"
+          label="手机号 "
           placeholder="请输入您的手机号"
+          maxlength="11"
           v-model="personalInfo.phone"
+          ref="phoneRef"
         ></t-input>
       </div>
       <!-- 输入身份证 -->
-      <div class="input_item">
+      <div class="idCard input_item myRequired">
         <t-input
-          label="身份证 *"
+          label="身份证 "
           placeholder="请输入您的身份证"
+          maxlength="18"
           v-model="personalInfo.idCard"
+          ref="idCardRef"
         ></t-input>
       </div>
       <!-- 输入邮箱 -->
@@ -68,7 +79,8 @@
 <script setup lang="ts">
 import SelectBirthday from './applicant_information_select_birthday/index.vue';
 import SelectCareer from './applicant_information_select_career/index.vue';
-import { reactive } from 'vue';
+import { ref, reactive } from 'vue';
+import { Message } from 'tdesign-mobile-vue';
 
 // 个人信息
 const personalInfo = reactive({
@@ -103,7 +115,78 @@ const addCareer = (value: any) => {
 
 // 提交信息事件
 const submitInfo = () => {
+  checkIdCard();
+  checkPhone();
+  checkBirthday();
+  checkName();
   console.log(personalInfo);
+};
+
+// 错误信息提醒
+const showMessage = (
+  theme: string,
+  content = '这是一条普通通知信息',
+  duration = 5000
+) => {
+  if (Message[theme]) {
+    Message[theme]({
+      offset: [10, 16],
+      content,
+      duration,
+      icon: true,
+      zIndex: 20000,
+      context: document.querySelector('.name')
+    });
+  }
+};
+
+const showErrorMessage = (msg: string) => showMessage('error', msg);
+
+// 检查姓名
+const nameRef = ref<HTMLElement | null>(null);
+const checkName = () => {
+  if (personalInfo.name === '') {
+    showErrorMessage('姓名为必填项，请输入您的姓名！');
+    nameRef.value && nameRef.value.focus();
+  }
+};
+
+// 检查生日
+const birthdayRef = ref<InstanceType<typeof SelectBirthday>>();
+const checkBirthday = () => {
+  if (personalInfo.birthday === '') {
+    showErrorMessage('生日为必填项，请选择您的生日！');
+    // 未选择生日，打开生日选择器
+    if (birthdayRef.value && personalInfo.name !== '') {
+      birthdayRef.value.setVisibleBirthday(true);
+    }
+  }
+};
+
+// 检查手机号
+const phoneRef = ref<HTMLElement | null>(null);
+const checkPhone = () => {
+  if (!/^1\d{10}$/.test(personalInfo.phone)) {
+    if (personalInfo.phone === '') {
+      showErrorMessage('手机号为必填项，请输入您的手机号！');
+    } else {
+      showErrorMessage('请输入正确的手机号！');
+    }
+    phoneRef.value && phoneRef.value.focus();
+  }
+};
+
+// 检查身份证
+const idCardRef = ref<HTMLElement | null>(null);
+const checkIdCard = () => {
+  if (!/^\d{18}$/.test(personalInfo.idCard)) {
+    if (personalInfo.idCard === '') {
+      showErrorMessage('身份证为必填项，请输入您的身份证！');
+    } else {
+      showErrorMessage('请输入正确的身份证！');
+    }
+    idCardRef.value && idCardRef.value.focus();
+  }
 };
 </script>
 
@@ -113,6 +196,7 @@ const submitInfo = () => {
     height: 1.28rem;
   }
   .contain {
+    margin-top: 1.28rem;
     font-size: 0.4267rem;
     color: #000000;
     font-weight: 400;
@@ -123,13 +207,17 @@ const submitInfo = () => {
       .t-cell--middle {
         padding: 0 0.4267rem;
       }
-      //   --td-cell-vertical-padding: 0.4267rem 0;
     }
     .input_item {
       --td-input-vertical-padding: 0.4267rem 0.4267rem;
-      //   --td-spacer-2: 1.3067rem;
-      /deep/ .t-input__wrap--prefix {
+      :deep(.t-input__wrap--prefix) {
         width: 2.16rem;
+      }
+    }
+    .myRequired {
+      :deep(.t-input__label)::after {
+        content: '*';
+        color: red;
       }
     }
   }

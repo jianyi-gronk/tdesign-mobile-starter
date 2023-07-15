@@ -1,8 +1,8 @@
 <template>
   <!-- 选择生日 -->
-  <div class="birthday input_item">
+  <div class="birthday input_item myRequired">
     <t-input
-      label="生日 *"
+      label="生日 "
       placeholder="请输入您的生日"
       :value="pickerBirthdayValueText"
       @click="visibleBirthday = true"
@@ -39,7 +39,7 @@ import { ref } from 'vue';
 const visibleBirthday = ref(false);
 const pickerBirthdayValue = ref('2000-1-1');
 const pickerBirthdayValueText = ref('');
-const today = new Date();
+const today = new Date().getTime();
 
 const onChangeBirthday = (value: string) => {
   console.log('change: ', value);
@@ -64,6 +64,15 @@ const onConfirmBirthday = (value: string) => {
   visibleBirthday.value = false;
   emit('confirmBirthday', value);
 };
+
+// 未选择生日，打开生日选择器
+const setVisibleBirthday = (value: boolean) => {
+  visibleBirthday.value = value;
+};
+
+defineExpose({
+  setVisibleBirthday
+});
 </script>
 
 <style scoped>
