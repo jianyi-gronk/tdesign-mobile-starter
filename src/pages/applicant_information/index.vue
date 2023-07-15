@@ -23,9 +23,9 @@
         </t-cell>
       </div>
       <!-- 输入姓名 -->
-      <div class="name input_item">
+      <div class="name input_item myRequired">
         <t-input
-          label="姓名 *"
+          label="姓名 "
           v-model="personalInfo.name"
           placeholder="请输入您的姓名"
           ref="nameRef"
@@ -37,19 +37,21 @@
         ref="birthdayRef"
       ></SelectBirthday>
       <!-- 输入手机号 -->
-      <div class="phone input_item">
+      <div class="phone input_item myRequired">
         <t-input
-          label="手机号 *"
+          label="手机号 "
           placeholder="请输入您的手机号"
+          maxlength="11"
           v-model="personalInfo.phone"
           ref="phoneRef"
         ></t-input>
       </div>
       <!-- 输入身份证 -->
-      <div class="idCard input_item">
+      <div class="idCard input_item myRequired">
         <t-input
-          label="身份证 *"
+          label="身份证 "
           placeholder="请输入您的身份证"
+          maxlength="18"
           v-model="personalInfo.idCard"
           ref="idCardRef"
         ></t-input>
@@ -205,13 +207,17 @@ const checkIdCard = () => {
       .t-cell--middle {
         padding: 0 0.4267rem;
       }
-      //   --td-cell-vertical-padding: 0.4267rem 0;
     }
     .input_item {
       --td-input-vertical-padding: 0.4267rem 0.4267rem;
-      //   --td-spacer-2: 1.3067rem;
-      /deep/ .t-input__wrap--prefix {
+      :deep(.t-input__wrap--prefix) {
         width: 2.16rem;
+      }
+    }
+    .myRequired {
+      :deep(.t-input__label)::after {
+        content: '*';
+        color: red;
       }
     }
   }
