@@ -49,11 +49,13 @@ const onPickBirthday = (value: string) => {
   console.log('pick: ', value);
 };
 
+//取消选择
 const onCancelBirthday = () => {
   console.log('cancel');
   visibleBirthday.value = false;
 };
 
+//向父组件传值
 const emit = defineEmits<{
   (event: 'confirmBirthday', value: string): void;
 }>();
