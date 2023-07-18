@@ -68,13 +68,16 @@ const valueSearch = ref('');
   height: 21.6533rem;
   overflow: hidden;
 }
+
 .example-search {
   background-color: #fff;
   padding: 6px 16px;
   // margin-top: 0.5333rem;
 }
+
 .calendar {
   margin-top: 2.1333rem;
+
   // position: relative;
   .controllDate {
     transform: translate(20%, 100%);

@@ -5,6 +5,10 @@
         <t-icon name="location" size="0.64rem" class="iconlocation"></t-icon>
         <span class="custom-title">深圳市</span>
       </template>
+      <template #right>
+        <t-icon name="ellipsis" size="0.64rem" />
+        <t-icon name="home" size="0.64rem" />
+      </template>
     </t-navbar>
   </div>
 </template>
@@ -15,10 +19,10 @@ import { Icon as TIcon } from 'tdesign-icons-vue-next';
 <style scoped lang="less">
 .location {
   width: 10rem;
-  // height: 0.5333rem;
+  height: 0.5333rem;
   .t-navbar {
     width: 10rem;
-    // height: 0.5333rem;
+    height: 0.5333rem;
     padding: 0px 10px;
   }
 
