@@ -5,7 +5,7 @@
       <icon name="check-circle" size="70px" />
       <div class="success">购买成功</div>
       <div class="card">
-        <div class="pic"></div>
+        <img src="src\assets\images\picture\fwsjcxdh.png" alt="" class="pic" />
         <div class="card-title">{{ article.name }}</div>
         <div class="des">
           <icon name="time" size="14px" /> {{ article.date }}
@@ -17,7 +17,7 @@
     <div class="members">
       <div class="text">报名人员</div>
       <div class="item" v-for="member in article.members">
-        <div class="avatar"></div>
+        <img src="src\assets\images\avatar\cyx.png" alt="" class="avatar" />
         <div class="user">
           <div class="username">{{ member.username }}</div>
           <div class="des">{{ member.age }}岁 {{ member.identity }}</div>
@@ -87,53 +87,45 @@ const shareList = {
   friends: [
     {
       name: 'Allen',
-      imgUrl: ''
+      imgUrl: 'src/assets/images/avatar/small/Allen.png'
     },
     {
       name: 'Nick',
-      imgUrl: ''
+      imgUrl: 'src/assets/images/avatar/small/Nick.png'
     },
     {
       name: 'Jackey',
-      imgUrl: ''
+      imgUrl: 'src/assets/images/avatar/small/Jacky.png'
     },
     {
-      name: 'Sb',
-      imgUrl: ''
+      name: 'Eric',
+      imgUrl: 'src/assets/images/avatar/small/Eric.png'
     },
     {
-      name: 'Allen',
-      imgUrl: ''
-    },
-    {
-      name: 'Nick',
-      imgUrl: ''
-    },
-    {
-      name: 'Jackey',
-      imgUrl: ''
+      name: 'Johnson',
+      imgUrl: 'src/assets/images/avatar/small/Johnson.png'
     }
   ],
   media: [
     {
       name: 'WeChat',
-      imgUrl: ''
+      imgUrl: 'src/assets/images/icon/weixin.png'
     },
     {
       name: 'QQ',
-      imgUrl: ''
+      imgUrl: 'src/assets/images/icon/QQ.png'
     },
     {
       name: 'Doc',
-      imgUrl: ''
+      imgUrl: 'src/assets/images/icon/Doc.png'
     },
     {
       name: 'Map',
-      imgUrl: ''
+      imgUrl: 'src/assets/images/icon/Map.png'
     },
     {
       name: 'QQ Music',
-      imgUrl: ''
+      imgUrl: 'src/assets/images/icon/QQMusic.png'
     }
   ]
 };
@@ -142,8 +134,6 @@ const visible = ref(false);
 
 const onClose = () => {
   console.log('s');
-
-  visible.value = false;
 };
 </script>
 
