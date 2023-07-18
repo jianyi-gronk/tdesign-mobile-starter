@@ -1,5 +1,6 @@
 // router/index.ts
 import { createRouter, createWebHashHistory } from 'vue-router';
+import MyPage from '..pages/my/my.vue';
 
 const routes = [
   { path: '/', component: () => import('../pages/home/index.vue') },
