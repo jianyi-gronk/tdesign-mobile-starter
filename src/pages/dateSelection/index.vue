@@ -11,6 +11,20 @@
       ></t-search>
     </div>
     <div class="calendar">
+      <icon
+        name="chevron-left"
+        size="large"
+        :class="visible ? 'icon' : 'none1'"
+        style="left: 10px; top: 23%"
+        @click="visible = false"
+      ></icon>
+      <icon
+        name="close"
+        size="large"
+        :class="visible ? 'icon' : 'none1'"
+        style="right: 10px; top: 23%"
+        @click="visible = false"
+      ></icon>
       <t-calendar
         v-model:visible="visible"
         :value="value"
@@ -33,7 +47,7 @@
 <script setup lang="ts">
 import location from './location.vue';
 import { ref } from 'vue';
-
+import { Icon } from 'tdesign-icons-vue-next';
 const visible = ref(true);
 const handleConfirm = (val: string) => {
   visible.value = false;
@@ -69,5 +83,13 @@ const valueSearch = ref('');
     transform: translate(20%, 100%);
     font-size: 0.5333rem;
   }
+}
+.icon {
+  z-index: 999999;
+  position: absolute;
+}
+.none1 {
+  // display: none;
+  visibility: hidden;
 }
 </style>
