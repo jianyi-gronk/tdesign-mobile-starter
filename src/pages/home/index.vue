@@ -115,12 +115,6 @@
             </t-tabs>
           </t-sticky>
         </div>
-        <!-- <div class="filter">
-          <div class="filter_">
-            <icon-font name="filter" size="large" />
-            <span style="font-size: 0.3733rem">筛选</span>
-          </div>
-        </div> -->
       </div>
       <!-- <div class="other-content" v-for="i in 50" :key="i"></div> -->
     </div>
@@ -152,10 +146,6 @@ import { useRouter } from 'vue-router';
 import LatestActivity from './LatestActivities.vue';
 import HighScoreActivity from './HighScoreActivities.vue';
 //import { Icon as TIcon } from 'tdesign-icons-vue-next';
-
-const onChange = (val: string) => {
-  console.log('change: ', val);
-};
 
 const value = ref('');
 
@@ -292,10 +282,10 @@ img {
 
 .container {
   width: 100%;
-  padding-top: 20px;
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
-  //align-items: center;
+  align-items: center;
 }
 
 .placeholder {
@@ -318,7 +308,11 @@ img {
   position: -webkit-sticky;
   position: sticky;
   top: 194px;
+<<<<<<< HEAD
   // height: 48px;
+=======
+  height: 48px;
+>>>>>>> fb6e4d1924879709b3f68849a89ed49cca4291b9
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -360,16 +354,99 @@ img {
   height: 1.28rem;
   position: absolute;
   margin-left: 6.6667rem;
+<<<<<<< HEAD
   margin-top: 11.7067rem;
   //border-left: 1px solid #e7e7e7ff;
+=======
+  /* margin-top: 11.7067rem; */
+  margin-bottom: 10px;
+  border-left: 1px solid #e7e7e7ff;
+>>>>>>> fb6e4d1924879709b3f68849a89ed49cca4291b9
   border-bottom: 0.5px solid #e7e7e7ff;
 }
 .filter_ {
   width: 3.3333rem;
   height: 0.5867rem;
+<<<<<<< HEAD
   display: flex;
   justify-content: center;
   align-items: center;
   border-left: 1px solid #e7e7e7ff;
+=======
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid #e7e7e7ff;
+}
+.fil_header {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.fil_content {
+  margin-top: 10px;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  .fil_item {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    .item_choose {
+      display: flex;
+      padding: 0 10px;
+      align-items: center;
+    }
+    .item_title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .item_tag {
+      width: 100%;
+      margin-bottom: 10px;
+      .tag {
+        width: 30%;
+        text-align: center;
+        margin: 0 5px;
+        display: inline-block;
+        height: 30px;
+        line-height: 30px;
+        margin-bottom: 13px;
+      }
+    }
+    .item_content {
+      margin-bottom: 15px;
+    }
+  }
+}
+.fil_footer {
+  display: flex;
+  justify-content: space-evenly;
+}
+.btn {
+  font-size: 14px;
+  padding: 10px;
+  margin: 15px 0;
+}
+
+.btn--cancel {
+  color: #0052d9;
+  border-radius: 5px;
+  width: 35%;
+  text-align: center;
+}
+
+.btn--confirm {
+  color: white;
+  background-color: #0052d9;
+  border-radius: 5px;
+  width: 35%;
+  text-align: center;
+>>>>>>> fb6e4d1924879709b3f68849a89ed49cca4291b9
 }
 </style>

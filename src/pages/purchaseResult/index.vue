@@ -1,14 +1,11 @@
 <template>
   <div class="container">
-    <div class="header">
-      <icon name="chevron-left" size="25px" />
-      <div class="title">购买结果</div>
-    </div>
+    <t-navbar title="标题文字" :fixed="false" left-arrow />
     <div class="main">
       <icon name="check-circle" size="70px" />
       <div class="success">购买成功</div>
       <div class="card">
-        <div class="pic"></div>
+        <img src="src\assets\images\picture\fwsjcxdh.png" alt="" class="pic" />
         <div class="card-title">{{ article.name }}</div>
         <div class="des">
           <icon name="time" size="14px" /> {{ article.date }}
@@ -20,7 +17,7 @@
     <div class="members">
       <div class="text">报名人员</div>
       <div class="item" v-for="member in article.members">
-        <div class="avatar"></div>
+        <img src="src\assets\images\avatar\cyx.png" alt="" class="avatar" />
         <div class="user">
           <div class="username">{{ member.username }}</div>
           <div class="des">{{ member.age }}岁 {{ member.identity }}</div>
@@ -34,11 +31,36 @@
         size="large"
         theme="primary"
         variant="outline"
+        @click="visible = true"
       >
         <icon name="share" size="20px" />分享给朋友
       </t-button>
       <t-button class="check-btn" size="large" theme="primary">去查看</t-button>
     </div>
+
+    <t-popup v-model="visible" placement="bottom" style="height: 278px">
+      <div class="share_window">
+        <div class="text">分享给朋友</div>
+        <t-grid :column="0" class="grid-demo">
+          <t-grid-item
+            v-for="item in shareList.friends"
+            :key="item"
+            :text="item.name"
+            :image="item.imgUrl"
+          />
+        </t-grid>
+        <div class="text">分享到社媒</div>
+        <t-grid :column="0" class="grid-demo">
+          <t-grid-item
+            v-for="item in shareList.media"
+            :key="item"
+            :text="item.name"
+            :image="item.imgUrl"
+          />
+        </t-grid>
+      </div>
+    </t-popup>
+    <div class="close-btn" @click="onClose">取消</div>
   </div>
 </template>
 
@@ -61,49 +83,75 @@ const article: TDActivity = {
   ]
 };
 
-const index: Ref<number | string> = ref('');
+const shareList = {
+  friends: [
+    {
+      name: 'Allen',
+      imgUrl: 'src/assets/images/avatar/small/Allen.png'
+    },
+    {
+      name: 'Nick',
+      imgUrl: 'src/assets/images/avatar/small/Nick.png'
+    },
+    {
+      name: 'Jackey',
+      imgUrl: 'src/assets/images/avatar/small/Jacky.png'
+    },
+    {
+      name: 'Eric',
+      imgUrl: 'src/assets/images/avatar/small/Eric.png'
+    },
+    {
+      name: 'Johnson',
+      imgUrl: 'src/assets/images/avatar/small/Johnson.png'
+    }
+  ],
+  media: [
+    {
+      name: 'WeChat',
+      imgUrl: 'src/assets/images/icon/weixin.png'
+    },
+    {
+      name: 'QQ',
+      imgUrl: 'src/assets/images/icon/QQ.png'
+    },
+    {
+      name: 'Doc',
+      imgUrl: 'src/assets/images/icon/Doc.png'
+    },
+    {
+      name: 'Map',
+      imgUrl: 'src/assets/images/icon/Map.png'
+    },
+    {
+      name: 'QQ Music',
+      imgUrl: 'src/assets/images/icon/QQMusic.png'
+    }
+  ]
+};
+
+const visible = ref(false);
+
+const onClose = () => {
+  console.log('s');
+};
 </script>
 
 <style lang="less" scoped>
 .container {
+  --td-navbar-bg-color: #f5f6f7ff;
   background: #f5f6f7ff;
   height: 100vh;
   width: 100vw;
   color: #000000e6;
   font-family: 'PingFang SC';
 
-  .header {
-    width: 100%;
-    height: 48px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    .title {
-      font-size: 18px;
-      font-weight: 600;
-
-      text-align: center;
-      line-height: 48px;
-      margin: 0 auto;
-    }
-
-    .t-icon {
-      fill: #000000e6;
-      position: fixed;
-      top: 12px;
-      left: 20px;
-      display: block;
-      justify-self: start;
-    }
-  }
-
   .main {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+    padding-top: 60px;
 
     .t-icon {
       color: #2ba471;
@@ -199,10 +247,11 @@ const index: Ref<number | string> = ref('');
       }
     }
   }
+
   .footer-btns {
     position: fixed;
     bottom: 16px;
-    margin: 0 auto;
+    margin: 0 16px;
     .share-btn {
       width: 167.5px;
       height: 48px;
@@ -213,5 +262,29 @@ const index: Ref<number | string> = ref('');
       height: 48px;
     }
   }
+}
+.share_window {
+  margin-left: 16px;
+  margin-top: 16px;
+  --td-grid-item-description-font-size: 12px;
+  .text {
+    color: #00000066;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+.close-btn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  color: #000000e6;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 48px;
+  border-top: 0.5px solid #e7e7e7ff;
+  z-index: 1500000;
 }
 </style>

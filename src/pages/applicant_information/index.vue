@@ -62,6 +62,7 @@
           label="邮箱"
           placeholder="请输入您的邮箱"
           v-model="personalInfo.email"
+          ref="emaliRef"
         ></t-input>
       </div>
       <!-- 选择职业 -->
@@ -115,6 +116,7 @@ const addCareer = (value: any) => {
 
 // 提交信息事件
 const submitInfo = () => {
+  checkEmail();
   checkIdCard();
   checkPhone();
   checkBirthday();
@@ -188,6 +190,18 @@ const checkIdCard = () => {
     idCardRef.value && idCardRef.value.focus();
   }
 };
+
+//检查邮箱格式
+const emaliRef = ref<HTMLElement | null>(null);
+const checkEmail = () => {
+  if (personalInfo.email !== '') {
+    let emailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+    if (!emailReg.test(personalInfo.email)) {
+      showErrorMessage('邮箱格式不正确，请重新输入！');
+    }
+    emaliRef.value && emaliRef.value.focus();
+  }
+};
 </script>
 
 <style lang="less" scoped>
@@ -196,7 +210,7 @@ const checkIdCard = () => {
     height: 1.28rem;
   }
   .contain {
-    margin-top: 1.28rem;
+    // margin-top: 1.28rem;
     font-size: 0.4267rem;
     color: #000000;
     font-weight: 400;
