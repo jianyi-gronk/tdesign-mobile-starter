@@ -80,7 +80,7 @@
             </t-tab-panel>
           </t-tabs>
         </div>
-        <div class="filter" @click="visible=true">
+        <div class="filter" @click="visible = true">
           <div class="filter_">
             <icon-font name="filter" size="large" />
             <span style="font-size: 0.3733rem">筛选</span>
@@ -258,7 +258,6 @@
 import { IconFont } from 'tdesign-icons-vue-next';
 import { ref } from 'vue';
 
-
 const value = ref('');
 
 const imageCdn = 'https://tdesign.gtimg.com/miniprogram/images';
@@ -307,7 +306,6 @@ img {
   height: 192px;
 }
 
-
 .热门推荐 {
   width: 80px;
   height: 28px;
@@ -318,93 +316,91 @@ img {
   font-family: 'PingFang SC';
   text-align: left;
   line-height: 28px;
-
 }
 
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .example-search {
-    width: 343px;
-    background-color: #fff;
-    padding: 21px 0px;
+  width: 343px;
+  background-color: #fff;
+  padding: 21px 0px;
 }
 
 .t-tabs {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .label-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    span {
-        margin-left: 3px;
-    }
+  span {
+    margin-left: 3px;
+  }
 }
 
 .search-box {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #f8f8f8;
-    padding: 5px;
-    box-sizing: border-box;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #f8f8f8;
+  padding: 5px;
+  box-sizing: border-box;
+  z-index: 1000;
 }
 
 .search-box input {
-    width: 100%;
-    height: 40px;
-    padding: 0 10px;
-    box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .container {
-    width: 100%;
-    padding-top: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 100%;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .placeholder {
-    height: 134px;
+  height: 134px;
 }
 
 .sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 166px;
-    height: 28px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    /* padding-left: 16px; */
-    width: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 166px;
+  height: 28px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* padding-left: 16px; */
+  width: 100%;
 }
 
 .sticky_ {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 194px;
-    height: 48px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    /* padding-left: 16px; */
-    width: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 194px;
+  height: 48px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* padding-left: 16px; */
+  width: 100%;
 }
 
 .sticky-content {
-
   width: 100%;
   background: #fff;
   padding-left: 16px;
@@ -417,41 +413,40 @@ img {
   font-family: 'PingFang SC';
   text-align: left;
   line-height: 28px;
-
 }
 
 .other-content {
-    width: 343px;
-    height: 120px;
-    border-radius: 9px;
-    opacity: 1;
-    background: #fff;
-    box-shadow: 0 6px 30px 5px #0000000d, 0 16px 24px 2px #0000000a,
-        0 8px 10px -5px #00000014;
-    margin-bottom: 20px;
+  width: 343px;
+  height: 120px;
+  border-radius: 9px;
+  opacity: 1;
+  background: #fff;
+  box-shadow: 0 6px 30px 5px #0000000d, 0 16px 24px 2px #0000000a,
+    0 8px 10px -5px #00000014;
+  margin-bottom: 20px;
 }
 
 .filter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 3.3333rem;
-    height: 1.28rem;
-    position: absolute;
-    margin-left: 6.6667rem;
-    /* margin-top: 11.7067rem; */
-    margin-bottom: 10px;
-    border-left: 1px solid #e7e7e7ff;
-    border-bottom: 0.5px solid #e7e7e7ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.3333rem;
+  height: 1.28rem;
+  position: absolute;
+  margin-left: 6.6667rem;
+  /* margin-top: 11.7067rem; */
+  margin-bottom: 10px;
+  border-left: 1px solid #e7e7e7ff;
+  border-bottom: 0.5px solid #e7e7e7ff;
 }
 
 .filter_ {
-    width: 3.3333rem;
-    height: 0.5867rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-left: 1px solid #e7e7e7ff;
+  width: 3.3333rem;
+  height: 0.5867rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid #e7e7e7ff;
 }
 .fil_header {
   text-align: center;
@@ -471,7 +466,7 @@ img {
     flex-direction: column;
     margin-top: 20px;
 
-    .item_choose{
+    .item_choose {
       display: flex;
       padding: 0 10px;
       align-items: center;
@@ -494,7 +489,7 @@ img {
         margin-bottom: 13px;
       }
     }
-    .item_content{
+    .item_content {
       margin-bottom: 15px;
     }
   }
