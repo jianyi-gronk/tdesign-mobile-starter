@@ -1,9 +1,9 @@
 import { createApp } from 'vue'
-import './style/reset.css'
 import App from './App.vue'
 import TDesign from 'tdesign-mobile-vue';
 import 'tdesign-mobile-vue/es/style/index.css';
 import router from './router'
+import './styles/reset.css'
 
 
 const setRem = () => {
