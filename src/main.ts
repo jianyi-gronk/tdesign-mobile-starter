@@ -4,6 +4,7 @@ import TDesign from 'tdesign-mobile-vue';
 import 'tdesign-mobile-vue/es/style/index.css';
 import router from './router'
 import './styles/reset.css'
+import './style.css'
 
 
 const setRem = () => {
