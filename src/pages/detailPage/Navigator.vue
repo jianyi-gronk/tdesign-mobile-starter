@@ -10,6 +10,8 @@
 
 <style scoped lang="less">
 .t-navbar {
+  --td-navbar-bg-color: #000;
+  --td-navbar-color: #fff;
   width: 375px;
   height: 48px;
   opacity: 1;
