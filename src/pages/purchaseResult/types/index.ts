@@ -10,4 +10,5 @@ export interface TDUser {
     username: string;
     age: number | undefined;
     identity: string | undefined;
+    uid: string;
 }
