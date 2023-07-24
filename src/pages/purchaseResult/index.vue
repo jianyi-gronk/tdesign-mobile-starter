@@ -49,11 +49,22 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
+import { Ref, ref, onMounted } from 'vue';
 import { TDActivity, TDUser } from './types/index';
 import { Icon } from 'tdesign-icons-vue-next';
+import { getUserdata, getActivity } from './../../api/user'
 
-const article: TDActivity = {
+onMounted(async () => {
+    const user = await getUserdata();
+    const activity = await getActivity();
+    console.log(activity);
+
+    // article.value = activity;
+
+});
+
+
+const article: Ref<TDActivity> = ref({
     uuid: '123',
     name: '2021 SICC服务设计创新大会',
     date: '2021年3月16日',
@@ -66,9 +77,9 @@ const article: TDActivity = {
             uid: '001'
         }
     ]
-};
+});
 
-const shareList = {
+const shareList = ref({
     friends: [
         {
             name: 'Allen',
@@ -113,7 +124,7 @@ const shareList = {
             imgUrl: 'src/assets/images/icon/QQMusic.png'
         }
     ]
-};
+});
 
 const visible = ref(false);
 
