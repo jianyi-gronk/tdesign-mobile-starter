@@ -38,11 +38,28 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
+import { Ref, ref, onMounted, reactive } from 'vue';
+import { reqRegionData } from '../../api/region';
+// import { type } from 'os';
 const curIndex: Ref<number | string> = ref('');
 const change = (index: number | string) => {
   curIndex.value = index;
 };
+type listArray = listArr[];
+interface listArr {
+  index: number;
+  children: string[];
+}
+let list1 = reactive<listArray>([]);
+async function getData() {
+  const result = await reqRegionData('/region');
+  // console.log(result);
+  list1 = result.data.list;
+  console.log(list1);
+}
+onMounted(() => {
+  getData();
+});
 const list = [
   {
     index: '热门城市',

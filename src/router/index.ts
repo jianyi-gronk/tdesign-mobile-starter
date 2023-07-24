@@ -1,14 +1,53 @@
-// router/index.ts
-import { createRouter, createWebHashHistory } from 'vue-router';
-import MyPage from '..pages/my/my.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../pages/home/index.vue';
+//import User from '../pages/home/user/MyManagement.vue';
+import dateSelection from '../pages/dateSelection/index.vue';
+import regionSelection from '../pages/regionSelection/index.vue';
+import ApplicantInformation from '../pages/applicant_information/index.vue';
+import purchaseResult from '../pages/purchaseResult/index.vue';
+import MyPage from '../pages/my/my.vue';
+import EventDetails from '../pages/eventDetails/eventDetails.vue';
 
 const routes = [
-  { path: '/', component: () => import('../pages/home/index.vue') },
-  { path: '/my', component: () => import('../pages/my/my.vue') }
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/my',
+    name: 'My',
+    component: MyPage
+  },
+  {
+    path: '/eventDetails',
+    name: 'eventDetails',
+    component: EventDetails
+  },
+  {
+    path: '/applicant_information',
+    name: 'ApplicantInformation',
+    component: ApplicantInformation
+  },
+  {
+    path: '/dateSelection',
+    name: 'dateSelection',
+    component: dateSelection
+  },
+  {
+    path: '/regionSelection',
+    name: 'regionSelection',
+    component: regionSelection
+  },
+  {
+    path: '/purchaseResult',
+    name: 'purchaseResult',
+    component: purchaseResult
+  }
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 });
 
