@@ -6,17 +6,21 @@ import router from './router'
 import './styles/reset.css'
 import './style.css'
 
-
 const setRem = () => {
-    const html = document.querySelector('html')!;
-    const width = html.getBoundingClientRect().width;
-    html.style.fontSize = width / 10 + 'px';
+  const html = document.querySelector('html')!;
+  const width = html.getBoundingClientRect().width;
+  html.style.fontSize = width / 10 + 'px';
 };
 
 setRem();
 
 window.onresize = () => {
-    setRem();
+  setRem();
 };
 
-createApp(App).use(router).use(TDesign).mount('#app')
+
+const app = createApp(App);
+app.use(router);
+app.use(TDesign);
+
+app.mount('#app');
