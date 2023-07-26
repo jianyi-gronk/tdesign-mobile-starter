@@ -1,4 +1,4 @@
-export default [
+const region = [
     // 用户登录接口
     {
         url: '/api/region',//请求地址
@@ -132,3 +132,4 @@ export default [
         },
     }
 ]
+export default region
