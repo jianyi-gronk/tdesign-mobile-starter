@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '../pages/home/index.vue';
 //import User from '../pages/home/user/MyManagement.vue';
 import dateSelection from '../pages/dateSelection/index.vue';
@@ -47,7 +47,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes
 });
 
