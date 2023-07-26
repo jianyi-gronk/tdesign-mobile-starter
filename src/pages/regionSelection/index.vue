@@ -50,12 +50,10 @@ interface listArr {
   index: number;
   children: string[];
 }
-let list1 = reactive<listArray>([]);
+let regionlist = reactive<listArray>([]);
 async function getData() {
   const result = await reqRegionData('/region');
-  // console.log(result);
-  list1 = result.data.list;
-  console.log(list1);
+  regionlist = result.data.list;
 }
 onMounted(() => {
   getData();
