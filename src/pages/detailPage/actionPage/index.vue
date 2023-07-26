@@ -213,13 +213,13 @@ function handleHidden() {
 .moveLeft {
   margin-left: -12px;
 }
+
 //动画效果
 .down-active {
   height: 100px;
   width: 375px;
   position: absolute;
   bottom: 80px;
-  //   z-index: 3;
   background-color: #fff;
 }
 </style>

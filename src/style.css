@@ -1,3 +1,6 @@
+:root{
+    --td-rate-text-font-size:14px;
+}
 body{
     margin: 0;
     overflow: hidden;
