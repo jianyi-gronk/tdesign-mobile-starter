@@ -1,10 +1,10 @@
 import { createApp } from 'vue';
-import TDesign from 'tdesign-mobile-vue';
-// import './style.css';
-import './styles/reset.css';
 import App from './App.vue';
-import router from './router';
+import TDesign from 'tdesign-mobile-vue';
 import 'tdesign-mobile-vue/es/style/index.css';
+import router from './router';
+import './styles/reset.css';
+import './style.css';
 
 const setRem = () => {
   const html = document.querySelector('html')!;

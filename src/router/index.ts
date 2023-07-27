@@ -7,6 +7,7 @@ import ApplicantInformation from '../pages/applicant_information/index.vue';
 import purchaseResult from '../pages/purchaseResult/index.vue';
 import MyPage from '../pages/my/my.vue';
 import EventDetails from '../pages/eventDetails/eventDetails.vue';
+import activityDetail from '../pages/detailPage/index.vue';
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
     path: '/purchaseResult',
     name: 'purchaseResult',
     component: purchaseResult
+  },
+  {
+    path: '/activityDetail',
+    name: 'activityDetail',
+    component: activityDetail
   }
 ];
 
