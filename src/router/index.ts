@@ -3,7 +3,7 @@ import Home from '../pages/home/index.vue';
 //import User from '../pages/home/user/MyManagement.vue';
 import dateSelection from '../pages/dateSelection/index.vue';
 import regionSelection from '../pages/regionSelection/index.vue';
-import ApplicantInformation from '../pages/applicant_information/index.vue';
+import ApplicantInformation from '../pages/applicantInformation/index.vue';
 import purchaseResult from '../pages/purchaseResult/index.vue';
 import MyPage from '../pages/my/my.vue';
 import EventDetails from '../pages/eventDetails/eventDetails.vue';
@@ -26,8 +26,8 @@ const routes = [
     component: EventDetails
   },
   {
-    path: '/applicant_information',
-    name: 'ApplicantInformation',
+    path: '/applicantInformation',
+    name: 'applicantInformation',
     component: ApplicantInformation
   },
   {
