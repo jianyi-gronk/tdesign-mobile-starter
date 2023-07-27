@@ -78,8 +78,8 @@
 </template>
 
 <script setup lang="ts">
-import SelectBirthday from './applicant_information_select_birthday/index.vue';
-import SelectCareer from './applicant_information_select_career/index.vue';
+import SelectBirthday from './selectBirthday/index.vue';
+import SelectCareer from './selectCareer/index.vue';
 import { ref, reactive } from 'vue';
 import { Message } from 'tdesign-mobile-vue';
 
