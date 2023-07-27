@@ -1,10 +1,10 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+import App from './App.vue';
 import TDesign from 'tdesign-mobile-vue';
 import 'tdesign-mobile-vue/es/style/index.css';
-import router from './router'
-import './styles/reset.css'
-import './style.css'
+import router from './router';
+import './styles/reset.css';
+import './style.css';
 
 const setRem = () => {
   const html = document.querySelector('html')!;
@@ -17,7 +17,6 @@ setRem();
 window.onresize = () => {
   setRem();
 };
-
 
 const app = createApp(App);
 app.use(router);
