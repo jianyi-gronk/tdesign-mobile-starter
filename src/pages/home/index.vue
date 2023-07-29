@@ -154,7 +154,7 @@ import { useRouter } from 'vue-router';
 import LatestActivity from './LatestActivities.vue';
 import HighScoreActivity from './HighScoreActivities.vue';
 // 引入首页筛选组件
-import Filter from '../filter/filter.vue'
+import Filter from '../filter/filter.vue';
 //import { Icon as TIcon } from 'tdesign-icons-vue-next';
 
 const onChange = (val: string) => {
@@ -184,7 +184,7 @@ const handleTabClick = (value: string) => {
     router.push('/');
     //console.log('1')
   } else if (value === 'label_2') {
-    router.push('/my');
+    router.push('/admin');
     //console.log('2')
   }
 };
@@ -201,12 +201,12 @@ imgUrl['/src/assets/head-bg.png']().then((module) => {
   imgSrc.value = (module as { default: string }).default;
 });
 //筛选跳转
-const vis = ref(false)
-const changeVis = ()=>{
-  vis.value = false
-}
+const vis = ref(false);
+const changeVis = () => {
+  vis.value = false;
+};
 const handleFilterClick = () => {
-  vis.value = true
+  vis.value = true;
 };
 //地区跳转
 const handleLocationClick = () => {
