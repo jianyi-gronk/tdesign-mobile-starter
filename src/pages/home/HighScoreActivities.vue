@@ -1,5 +1,9 @@
 <template>
-  <div class="container" style="width: 375px; display: flex" @click="handleClick">
+  <div
+    class="container"
+    style="width: 375px; display: flex"
+    @click="handleClick"
+  >
     <div class="other-content" style="display: flex; align-items: flex-start">
       <div>
         <t-image

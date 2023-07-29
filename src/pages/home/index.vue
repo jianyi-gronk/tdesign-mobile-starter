@@ -1,12 +1,10 @@
 <template>
   <div>
-    <div class="header-background"></div>
-    <div style="width: 375px; height: 163px; z-index: 3">
+    <!-- <div class="header-background"></div> -->
+    <div style="width: 375px; height: 163px">
       <img
         :src="imgSrc"
-        alt="头部背景"
-        class="header-image"
-        style="width: 375px; height: 163px"
+        style="width: 375px; height: 163px; position: fixed; top: 0"
       />
     </div>
     <div
@@ -19,7 +17,10 @@
         margin-top: 60px;
       "
     >
-      <div style="display: flex; align-items: center; z-index: 5">
+      <div
+        style="display: flex; align-items: center; z-index: 10"
+        @click="handleLocationClick"
+      >
         <icon-font name="location" size="20px" />
         <span style="font-size: 14px; margin-left: 4px">深圳市</span>
       </div>
@@ -207,6 +208,10 @@ const changeVis = ()=>{
 const handleFilterClick = () => {
   vis.value = true
 };
+//地区跳转
+const handleLocationClick = () => {
+  router.push('/location');
+};
 </script>
 
 <style lang="less" scoped>
@@ -228,7 +233,7 @@ const handleFilterClick = () => {
   left: 0;
   width: 375px;
   height: 163px;
-  z-index: 999;
+  z-index: 1;
 }
 .bottom-tab-bar {
   position: fixed;
