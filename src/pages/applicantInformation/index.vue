@@ -78,13 +78,43 @@
 </template>
 
 <script setup lang="ts">
-import SelectBirthday from './applicant_information_select_birthday/index.vue';
-import SelectCareer from './applicant_information_select_career/index.vue';
-import { ref, reactive } from 'vue';
+import SelectBirthday from './selectBirthday/index.vue';
+import SelectCareer from './selectCareer/index.vue';
+import { ref, reactive, onMounted } from 'vue';
 import { Message } from 'tdesign-mobile-vue';
+import { reqApplicantInfoData } from '../../api/applicantInfo';
+
+interface infoProps {
+  defaultState: boolean;
+  name: string;
+  birthday: string;
+  phone: string;
+  idCard: string;
+  email: string;
+  career: string;
+}
+
+let applicantInfo = reactive<infoProps>({
+  defaultState: true,
+  name: '',
+  birthday: '',
+  phone: '',
+  idCard: '',
+  email: '',
+  career: ''
+});
+
+async function getApplicantInfoData() {
+  const result = await reqApplicantInfoData('/applicantInfo');
+  applicantInfo = result.data.info;
+}
+
+onMounted(() => {
+  getApplicantInfoData();
+});
 
 // 个人信息
-const personalInfo = reactive({
+let personalInfo = reactive<infoProps>({
   defaultState: true,
   name: '',
   birthday: '',

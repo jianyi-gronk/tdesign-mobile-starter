@@ -110,7 +110,8 @@
                   </div>
                 </template>
                 <template #default>
-                  <LatestActivity v-if="currentTab === 'first'" />
+                  <!-- <LatestActivity v-if="currentTab === 'first'" /> -->
+                  <Filter v-if="vis" :vis="vis" @changeVis="changeVis"></Filter>
                 </template>
               </t-tab-panel>
             </t-tabs>
@@ -152,6 +153,8 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import LatestActivity from './LatestActivities.vue';
 import HighScoreActivity from './HighScoreActivities.vue';
+// 引入首页筛选组件
+import Filter from '../filter/filter.vue'
 //import { Icon as TIcon } from 'tdesign-icons-vue-next';
 
 const onChange = (val: string) => {
@@ -198,8 +201,12 @@ imgUrl['/src/assets/head-bg.png']().then((module) => {
   imgSrc.value = (module as { default: string }).default;
 });
 //筛选跳转
+const vis = ref(false)
+const changeVis = ()=>{
+  vis.value = false
+}
 const handleFilterClick = () => {
-  router.push('/filter');
+  vis.value = true
 };
 //地区跳转
 const handleLocationClick = () => {
