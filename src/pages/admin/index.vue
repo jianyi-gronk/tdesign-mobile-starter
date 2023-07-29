@@ -47,7 +47,7 @@
 import { EditIcon } from 'tdesign-icons-vue-next';
 import { onMounted, reactive, ref } from 'vue';
 import Mycard from '../../components/MyCard.vue';
-import { reqActivityInfo } from '../../api/activity';
+import { reqActivityInfo } from '../../api/activityInfo/activity';
 const currentValue = ref('0');
 interface myInfo {
   userName: string;
@@ -235,3 +235,4 @@ const onChange = (value: string) => {
   opacity: 1;
 }
 </style>
+../../api/activityInfo/activity

@@ -13,66 +13,66 @@ import Admin from '../pages/admin/index.vue';
 import DetailPage from '../pages/detailPage/index.vue';
 
 const routes = [
-    {
-        path: '/',
-        name: 'Home',
-        component: Home
-    },
-    {
-        path: '/my',
-        name: 'My',
-        component: MyPage
-    },
-    {
-        path: '/filter',
-        name: 'Filter',
-        component: Filter
-    },
-    {
-        path: '/eventDetails',
-        name: 'eventDetails',
-        component: EventDetails
-    },
-    {
-        path: '/location',
-        name: 'location',
-        component: Location
-    },
-    {
-        path: '/applicant_information',
-        name: 'ApplicantInformation',
-        component: ApplicantInformation
-    },
-    {
-        path: '/dateSelection',
-        name: 'dateSelection',
-        component: dateSelection
-    },
-    {
-        path: '/regionSelection',
-        name: 'regionSelection',
-        component: regionSelection
-    },
-    {
-        path: '/purchaseResult',
-        name: 'purchaseResult',
-        component: purchaseResult
-    },
-    {
-        path: '/admin',
-        name: 'admin',
-        component: Admin
-    },
-    {
-        path: '/detail_page',
-        name: 'detailPage',
-        component: DetailPage
-    }
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/my',
+    name: 'My',
+    component: MyPage
+  },
+  {
+    path: '/filter',
+    name: 'Filter',
+    component: Filter
+  },
+  {
+    path: '/eventDetails',
+    name: 'eventDetails',
+    component: EventDetails
+  },
+  {
+    path: '/location',
+    name: 'location',
+    component: Location
+  },
+  {
+    path: '/applicant_information',
+    name: 'ApplicantInformation',
+    component: ApplicantInformation
+  },
+  {
+    path: '/dateSelection',
+    name: 'dateSelection',
+    component: dateSelection
+  },
+  {
+    path: '/regionSelection',
+    name: 'regionSelection',
+    component: regionSelection
+  },
+  {
+    path: '/purchaseResult',
+    name: 'purchaseResult',
+    component: purchaseResult
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: Admin
+  },
+  {
+    path: '/detail_page',
+    name: 'detailPage',
+    component: DetailPage
+  }
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes
+  history: createWebHistory(),
+  routes
 });
 
 export default router;

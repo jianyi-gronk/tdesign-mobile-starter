@@ -9,23 +9,28 @@ const info = {
   friends: [
     {
       name: 'Allen',
-      imgUrl: 'src/assets/images/avatar/small/Allen.png'
+      imgUrl: 'src/assets/images/avatar/small/Allen.png',
+      uid: '100002'
     },
     {
       name: 'Nick',
-      imgUrl: 'src/assets/images/avatar/small/Nick.png'
+      imgUrl: 'src/assets/images/avatar/small/Nick.png',
+      uid: '100003'
     },
     {
       name: 'Jackey',
-      imgUrl: 'src/assets/images/avatar/small/Jacky.png'
+      imgUrl: 'src/assets/images/avatar/small/Jacky.png',
+      uid: '100004'
     },
     {
       name: 'Eric',
-      imgUrl: 'src/assets/images/avatar/small/Eric.png'
+      imgUrl: 'src/assets/images/avatar/small/Eric.png',
+      uid: '100005'
     },
     {
       name: 'Johnson',
-      imgUrl: 'src/assets/images/avatar/small/Johnson.png'
+      imgUrl: 'src/assets/images/avatar/small/Johnson.png',
+      uid: '100006'
     }
   ]
 };
