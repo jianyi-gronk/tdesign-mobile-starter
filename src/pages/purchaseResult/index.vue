@@ -6,17 +6,17 @@
       <div class="success">购买成功</div>
       <div class="card">
         <img src="src\assets\images\picture\fwsjcxdh.png" alt="" class="pic" />
-        <div class="card-title">{{ article.name }}</div>
+        <div class="card-title">{{ activity.name }}</div>
         <div class="des">
-          <icon name="time" size="14px" /> {{ article.date }}
-          <icon name="location" size="14px" /> {{ article.site }}
+          <icon name="time" size="14px" /> {{ activity.date }}
+          <icon name="location" size="14px" /> {{ activity.site }}
         </div>
       </div>
     </div>
 
     <div class="members">
       <div class="text">报名人员</div>
-      <div class="item" v-for="member in article.members">
+      <div class="item" v-for="member in activity.members">
         <img src="src\assets\images\avatar\cyx.png" alt="" class="avatar" />
         <div class="user">
           <div class="username">{{ member.username }}</div>
@@ -59,51 +59,38 @@
           />
         </t-grid>
       </div>
+      <div class="close-btn" @click="onClose">取消</div>
     </t-popup>
-    <div class="close-btn" @click="onClose">取消</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
+import { Ref, onMounted, reactive, ref } from 'vue';
 import { TDActivity, TDUser } from './types/index';
 import { Icon } from 'tdesign-icons-vue-next';
+import { reqApplicantInfoData } from '../../api/applicantInfo';
+import { reqActivityDetailInfo } from '../../api/activityDetail';
 
-const article: TDActivity = {
-  uuid: '123',
-  name: '2021 SICC服务设计创新大会',
-  date: '2021年3月16日',
-  site: '深圳市腾讯滨海大厦',
+const activity: Ref<TDActivity> = ref({
+  uuid: '',
+  name: '',
+  date: '',
+  site: '',
   members: [
     {
-      username: '蔡宣轩',
-      age: 29,
-      identity: '设计师/艺术从业者'
+      username: '',
+      age: 0,
+      identity: '',
+      uid: ''
     }
   ]
-};
+});
 
-const shareList = {
+const shareList = reactive({
   friends: [
     {
-      name: 'Allen',
-      imgUrl: 'src/assets/images/avatar/small/Allen.png'
-    },
-    {
-      name: 'Nick',
-      imgUrl: 'src/assets/images/avatar/small/Nick.png'
-    },
-    {
-      name: 'Jackey',
-      imgUrl: 'src/assets/images/avatar/small/Jacky.png'
-    },
-    {
-      name: 'Eric',
-      imgUrl: 'src/assets/images/avatar/small/Eric.png'
-    },
-    {
-      name: 'Johnson',
-      imgUrl: 'src/assets/images/avatar/small/Johnson.png'
+      name: '',
+      imgUrl: ''
     }
   ],
   media: [
@@ -128,13 +115,20 @@ const shareList = {
       imgUrl: 'src/assets/images/icon/QQMusic.png'
     }
   ]
-};
+});
 
 const visible = ref(false);
 
 const onClose = () => {
-  console.log('s');
+  visible.value = false;
 };
+
+onMounted(async () => {
+  const res1 = await reqApplicantInfoData('/applicantInfo');
+  shareList.friends = res1.data.info.friends;
+  const res2 = await reqActivityDetailInfo();
+  activity.value = res2.data.activity;
+});
 </script>
 
 <style lang="less" scoped>

@@ -15,7 +15,7 @@
     "mockjs": "^1.1.0",
     "moment": "^2.29.4",
     "tdesign-icons-vue-next": "^0.1.11",
-    "tdesign-mobile-vue": "^1.0.0-rc.1",
+    "tdesign-mobile-vue": "^1.0.0-rc.5",
     "vite-plugin-mock": "^2.9.6",
     "vue": "^3.3.4",
     "vue-router": "^4.0.13"
