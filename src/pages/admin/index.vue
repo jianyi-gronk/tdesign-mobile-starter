@@ -64,7 +64,7 @@ let user_info = reactive<myInfo>({
 });
 
 async function getMyInfo() {
-  const result = await reqActivityInfo('/MyInfo');
+  const result = await reqActivityInfo('/myInfo');
   user_info = result.data.MyInfo;
 }
 
@@ -119,8 +119,8 @@ let wait = reactive<cardInfoProps>({
 });
 
 async function getAllActivity() {
-  const result = await reqActivityInfo('/allActivity');
-  activities = result.data.allActivity;
+  const result = await reqActivityInfo('/allActivitives');
+  activities = result.data.allActivitives;
 }
 
 async function getFinishedActivity() {
