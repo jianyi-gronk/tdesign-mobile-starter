@@ -14,7 +14,11 @@
       </div>
       <div class="members">
         <div class="text">报名人员</div>
-        <div class="item" v-for="member in activity.members">
+        <div
+          class="item"
+          v-for="member in activity.members"
+          :key="activity.uuid"
+        >
           <img src="src\assets\images\avatar\cyx.png" alt="" class="avatar" />
           <div class="user">
             <div class="username">{{ member.username }}</div>
@@ -41,7 +45,7 @@
           <t-grid :column="0" class="grid-demo">
             <t-grid-item
               v-for="item in shareList.friends"
-              :key="item"
+              :key="item.uid"
               :text="item.name"
               :image="item.imgUrl"
             />
@@ -50,7 +54,7 @@
           <t-grid :column="0" class="grid-demo">
             <t-grid-item
               v-for="item in shareList.media"
-              :key="item"
+              :key="item.mid"
               :text="item.name"
               :image="item.imgUrl"
             />
@@ -66,8 +70,8 @@
 import { Ref, onMounted, reactive, ref } from 'vue';
 import { TDActivity, TDUser } from './types/index';
 import { Icon } from 'tdesign-icons-vue-next';
-import { reqApplicantInfoData } from '../../api/applicantInfo';
-import { reqActivityDetailInfo } from '../../api/activityDetail';
+import { reqApplicantInfoData } from '../../api/activityInfo/applicantInfo';
+import { reqActivityDetailInfo } from '../../api/activityInfo/activityDetail';
 
 const activity: Ref<TDActivity> = ref({
   uuid: '',
@@ -88,29 +92,35 @@ const shareList = reactive({
   friends: [
     {
       name: '',
-      imgUrl: ''
+      imgUrl: '',
+      uid: ''
     }
   ],
   media: [
     {
       name: 'WeChat',
-      imgUrl: 'src/assets/images/icon/weixin.png'
+      imgUrl: 'src/assets/images/icon/weixin.png',
+      mid: '1001'
     },
     {
       name: 'QQ',
-      imgUrl: 'src/assets/images/icon/QQ.png'
+      imgUrl: 'src/assets/images/icon/QQ.png',
+      mid: '1002'
     },
     {
       name: 'Doc',
-      imgUrl: 'src/assets/images/icon/Doc.png'
+      imgUrl: 'src/assets/images/icon/Doc.png',
+      mid: '1003'
     },
     {
       name: 'Map',
-      imgUrl: 'src/assets/images/icon/Map.png'
+      imgUrl: 'src/assets/images/icon/Map.png',
+      mid: '1004'
     },
     {
       name: 'QQ Music',
-      imgUrl: 'src/assets/images/icon/QQMusic.png'
+      imgUrl: 'src/assets/images/icon/QQMusic.png',
+      mid: '1005'
     }
   ]
 });
@@ -294,3 +304,4 @@ onMounted(async () => {
   z-index: 1500000;
 }
 </style>
+../../api/activityInfo/activityDetail ../../api/activityInfo/applicantInfo
