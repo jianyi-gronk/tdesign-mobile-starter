@@ -68,7 +68,7 @@
 
 <script setup lang="ts">
 import { Ref, onMounted, reactive, ref } from 'vue';
-import { TDActivity, TDUser } from './types/index';
+import { TDActivity } from './types/index';
 import { Icon } from 'tdesign-icons-vue-next';
 import { reqApplicantInfoData } from '../../api/activityInfo/applicantInfo';
 import { reqActivityDetailInfo } from '../../api/activityInfo/activityDetail';
