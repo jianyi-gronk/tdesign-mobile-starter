@@ -7,8 +7,8 @@ export interface TDActivity {
 }
 
 export interface TDUser {
-    username: string;
-    age: number | undefined;
-    identity: string | undefined;
-    uid: string;
+  username: string;
+  age: number | undefined;
+  identity: string | undefined;
+  uid: string;
 }

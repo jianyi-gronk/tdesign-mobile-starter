@@ -1,12 +1,10 @@
 <template>
   <div>
-    <div class="header-background"></div>
-    <div style="width: 375px; height: 163px; z-index: 3">
+    <!-- <div class="header-background"></div> -->
+    <div style="width: 375px; height: 163px">
       <img
         :src="imgSrc"
-        alt="头部背景"
-        class="header-image"
-        style="width: 375px; height: 163px"
+        style="width: 375px; height: 163px; position: fixed; top: 0"
       />
     </div>
     <div
@@ -19,7 +17,10 @@
         margin-top: 60px;
       "
     >
-      <div style="display: flex; align-items: center; z-index: 5">
+      <div
+        style="display: flex; align-items: center; z-index: 10"
+        @click="handleLocationClick"
+      >
         <icon-font name="location" size="20px" />
         <span style="font-size: 14px; margin-left: 4px">深圳市</span>
       </div>
@@ -153,7 +154,7 @@ import { useRouter } from 'vue-router';
 import LatestActivity from './LatestActivities.vue';
 import HighScoreActivity from './HighScoreActivities.vue';
 // 引入首页筛选组件
-import Filter from '../filter/filter.vue'
+import Filter from '../filter/filter.vue';
 //import { Icon as TIcon } from 'tdesign-icons-vue-next';
 
 const onChange = (val: string) => {
@@ -183,7 +184,7 @@ const handleTabClick = (value: string) => {
     router.push('/');
     //console.log('1')
   } else if (value === 'label_2') {
-    router.push('/my');
+    router.push('/admin');
     //console.log('2')
   }
 };
@@ -200,12 +201,16 @@ imgUrl['/src/assets/head-bg.png']().then((module) => {
   imgSrc.value = (module as { default: string }).default;
 });
 //筛选跳转
-const vis = ref(false)
-const changeVis = ()=>{
-  vis.value = false
-}
+const vis = ref(false);
+const changeVis = () => {
+  vis.value = false;
+};
 const handleFilterClick = () => {
-  vis.value = true
+  vis.value = true;
+};
+//地区跳转
+const handleLocationClick = () => {
+  router.push('/location');
 };
 </script>
 
@@ -228,7 +233,7 @@ const handleFilterClick = () => {
   left: 0;
   width: 375px;
   height: 163px;
-  z-index: 999;
+  z-index: 1;
 }
 .bottom-tab-bar {
   position: fixed;

@@ -1,7 +1,7 @@
 <template>
-  <!-- <Home /> -->
-  <RouterView></RouterView>
+  <router-view></router-view>
 </template>
+
 
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
@@ -10,9 +10,4 @@ import { RouterView } from 'vue-router';
 </script>
 
 <style scoped lang="less">
-* {
-  //margin: 0;
-  //padding: 0;
-  //box-sizing: border-box;
-}
 </style>
