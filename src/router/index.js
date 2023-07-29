@@ -8,6 +8,7 @@ import purchaseResult from '../pages/purchaseResult/index.vue';
 import MyPage from '../pages/my/my.vue';
 import Filter from '../pages/filter/filter.vue';
 import EventDetails from '../pages/eventDetails/eventDetails.vue';
+import Location from '../pages/location/location.vue';
 
 const routes = [
   {
@@ -29,6 +30,11 @@ const routes = [
     path: '/eventDetails',
     name: 'eventDetails',
     component: EventDetails
+  },
+  {
+    path: '/location',
+    name: 'location',
+    component: Location
   },
   {
     path: '/applicant_information',
