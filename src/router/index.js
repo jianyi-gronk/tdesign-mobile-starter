@@ -10,6 +10,7 @@ import Filter from '../pages/filter/filter.vue';
 import EventDetails from '../pages/eventDetails/eventDetails.vue';
 import Location from '../pages/location/location.vue';
 import Admin from '../pages/admin/index.vue';
+import DetailPage from '../pages/detailPage/index.vue';
 
 const routes = [
   {
@@ -61,6 +62,11 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: Admin
+  },
+  {
+    path: '/detail_page',
+    name: 'detailPage',
+    component: DetailPage
   }
 ];
 
