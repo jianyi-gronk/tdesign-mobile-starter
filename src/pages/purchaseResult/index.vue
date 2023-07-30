@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <t-navbar title="标题文字" :fixed="false" left-arrow />
+    <t-navbar title="购买结果" :fixed="false" left-arrow />
     <div class="main">
       <icon name="check-circle" size="70px" />
       <div class="success">购买成功</div>
@@ -153,7 +153,7 @@ onMounted(async () => {
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    padding-top: 60px;
+    padding-top: 1.6rem;
 
     .t-icon {
       color: #2ba471;
@@ -161,41 +161,42 @@ onMounted(async () => {
 
     .success {
       color: #000000e6;
-      font-size: 20px;
+      font-size: 0.5333rem;
       font-weight: 600;
-      margin-top: 20px;
+      margin-top: 0.5333rem;
       text-align: center;
-      line-height: 28px;
+      line-height: 0.7467rem;
     }
 
     .card {
-      width: 343px;
-      height: 282px;
-      margin-top: 24px;
-      border-radius: 12px;
+      width: 9.1467rem;
+      height: 7.52rem;
+      margin-top: 0.64rem;
+      border-radius: 0.32rem;
       opacity: 1;
       background: #ffffffff;
-      box-shadow: 0 6px 30px 5px #0000000d, 0 16px 24px 2px #0000000a,
-        0 8px 10px -5px #00000014;
-      padding: 16px;
+      box-shadow: 0 0.16rem 0.8rem 0.1333rem #0000000d,
+        0 0.4267rem 0.64rem 0.0533rem #0000000a,
+        0 0.2133rem 0.2667rem -0.1333rem #00000014;
+      padding: 0.4267rem;
 
       .pic {
-        width: 311px;
-        height: 175px;
-        border-radius: 9.06px;
+        width: 8.2933rem;
+        height: 4.6667rem;
+        border-radius: 0.2416rem;
         background-color: #040000;
-        margin-top: 0.44px;
+        margin-top: 0.0117rem;
       }
 
       .card-title {
         font-weight: 600;
-        font-size: 18px;
-        margin: 16px 0px;
+        font-size: 0.48rem;
+        margin: 0.4267rem 0rem;
       }
 
       .des {
         color: #000000e6;
-        font-size: 12px;
+        font-size: 0.32rem;
         font-weight: 400;
 
         .t-icon {
@@ -207,51 +208,51 @@ onMounted(async () => {
 
   .members {
     display: flex;
-    margin: 30px auto;
-    width: 327px;
+    margin: 0.8rem auto;
+    width: 8.72rem;
     display: flex;
     flex-direction: column;
 
     .text {
-      font-size: 16px;
+      font-size: 0.4267rem;
       font-weight: 600;
       font-family: 'PingFang SC';
     }
 
     .item {
-      width: 327px;
-      height: 82px;
-      border-radius: 9px;
+      width: 8.72rem;
+      height: 2.1867rem;
+      border-radius: 0.24rem;
       opacity: 1;
       background: #ffffffff;
       display: flex;
       justify-content: start;
       align-items: center;
-      margin-top: 12px;
+      margin-top: 0.32rem;
 
       .avatar {
-        width: 48px;
-        height: 48px;
+        width: 1.28rem;
+        height: 1.28rem;
         background-color: #fcecc2;
-        border-radius: 24px;
-        margin-left: 16px;
+        border-radius: 0.64rem;
+        margin-left: 0.4267rem;
       }
 
       .user {
-        margin-left: 12px;
+        margin-left: 0.32rem;
 
         .username {
-          font-size: 16px;
+          font-size: 0.4267rem;
           font-weight: 400;
-          line-height: 24px;
+          line-height: 0.64rem;
           color: #000000e6;
         }
 
         .des {
-          margin-top: 4px;
-          font-size: 14px;
+          margin-top: 0.1067rem;
+          font-size: 0.3733rem;
           font-weight: 400;
-          line-height: 22px;
+          line-height: 0.5867rem;
           color: #00000099;
         }
       }
@@ -260,31 +261,31 @@ onMounted(async () => {
 
   .footer-btns {
     position: fixed;
-    bottom: 16px;
-    left: 16px;
+    bottom: 0.4267rem;
+    left: 0.4267rem;
     margin: 0 auto;
 
     .share-btn {
-      width: 167.5px;
-      height: 48px;
+      width: 4.4667rem;
+      height: 1.28rem;
     }
 
     .check-btn {
-      margin-left: 8px;
-      width: 167.5px;
-      height: 48px;
+      margin-left: 0.2133rem;
+      width: 4.4667rem;
+      height: 1.28rem;
     }
   }
 }
 
 .share_window {
-  margin-left: 16px;
-  margin-top: 16px;
-  --td-grid-item-description-font-size: 12px;
+  margin-left: 0.4267rem;
+  margin-top: 0.4267rem;
+  --td-grid-item-description-font-size: 0.32rem;
 
   .text {
     color: #00000066;
-    font-size: 14px;
+    font-size: 0.3733rem;
     font-weight: 400;
   }
 }
@@ -294,14 +295,13 @@ onMounted(async () => {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 48px;
+  height: 1.28rem;
   color: #000000e6;
-  font-size: 16px;
+  font-size: 0.4267rem;
   font-weight: 400;
   text-align: center;
-  line-height: 48px;
-  border-top: 0.5px solid #e7e7e7ff;
+  line-height: 1.28rem;
+  border-top: 0.0133rem solid #e7e7e7ff;
   z-index: 1500000;
 }
 </style>
-../../api/activityInfo/activityDetail ../../api/activityInfo/applicantInfo
