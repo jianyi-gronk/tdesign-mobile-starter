@@ -13,68 +13,14 @@
           <div class="item_title">面向领域</div>
           <div class="item_tag">
             <t-check-tag
+              v-for="item in fields"
+              :key="item.id"
               variant="light-outline"
               size="large"
-              :content="['IT互联网', 'IT互联网']"
+              :content="item.field"
               shape="round"
               class="tag"
-              v-model:checked="checked[0]"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['艺术设计', '艺术设计']"
-              shape="round"
-              class="tag"
-              v-model:checked="checked[1]"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['科技', '科技']"
-              shape="round"
-              class="tag"
-              v-model:checked="checked[2]"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['电商', '电商']"
-              shape="round"
-              class="tag"
-              v-model:checked="checked[3]"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['教育', '教育']"
-              shape="round"
-              class="tag"
-              v-model:checked="checked[4]"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['医疗健康', '医疗健康']"
-              shape="round"
-              class="tag"
-              v-model:checked="checked[5]"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['心理学', '心理学']"
-              shape="round"
-              class="tag"
-              v-model:checked="checked[6]"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['摄影', '摄影']"
-              shape="round"
-              class="tag"
-              v-model:checked="checked[7]"
+              v-model:checked="item.checked"
             />
           </div>
         </div>
@@ -82,28 +28,14 @@
           <div class="item_title">活动形式</div>
           <div class="item_tag">
             <t-check-tag
+              v-for="item in forms"
+              :key="item.id"
               variant="light-outline"
               size="large"
-              :content="['讲座', '讲座']"
+              :content="item.form"
               shape="round"
               class="tag"
-              v-model:checked="checked[8]"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['展览', '展览']"
-              shape="round"
-              class="tag"
-              v-model:checked="checked[9]"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['工作坊', '工作坊']"
-              shape="round"
-              class="tag"
-              v-model:checked="checked[10]"
+              v-model:checked="item.checked"
             />
           </div>
         </div>
@@ -148,25 +80,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, h } from 'vue';
-import { Toast } from 'tdesign-mobile-vue';
-import { ErrorCircleIcon } from 'tdesign-icons-vue-next';
+import { ref, onMounted } from 'vue';
 import moment from 'moment';
-let max = 588;
-let min = 0;
-let checked = ref([
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false
-]);
+import { getFields, getForms } from '../../api/filter.ts';
+const max = 588;
+const min = 0;
+let fields = ref([]);
+let forms = ref([]);
+
 let rangeValue = ref([30, 70]);
 // 弹出层的显示与隐藏
 let visible = ref(true);
@@ -198,19 +119,12 @@ const handleConfirm = (val) => {
 };
 // 重置按钮
 const onReset = () => {
-  Object.assign(checked.value, [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false
-  ]);
+  forms.value.forEach((element) => {
+    element.checked = false;
+  });
+  fields.value.forEach((element) => {
+    element.checked = false;
+  });
   date.value = moment(today).format('YYYY年M月D日');
   rangeValue.value = [0, 0];
 };
@@ -221,7 +135,19 @@ const onComplete = () => {
 const close = () => {
   $emit('changeVis', false);
 };
-
+const getData = async () => {
+  let res = await getFields();
+  if (res.code == 200) {
+    fields.value = res.data.data;
+  }
+  let res1 = await getForms();
+  if (res1.code === 200) {
+    forms.value = res1.data.data;
+  }
+};
+onMounted(() => {
+  getData();
+});
 let prop = defineProps(['vis']);
 let $emit = defineEmits(['changeVis']);
 </script>
@@ -251,7 +177,7 @@ let $emit = defineEmits(['changeVis']);
       display: flex;
       /* padding: 0 5px; */
       align-items: center;
-      .t-input::v-deep {
+      :deep(.t-input) {
         padding: 8px;
       }
     }
