@@ -18,6 +18,7 @@
               :content="['IT互联网', 'IT互联网']"
               shape="round"
               class="tag"
+              v-model:checked="checked[0]"
             />
             <t-check-tag
               variant="light-outline"
@@ -25,6 +26,7 @@
               :content="['艺术设计', '艺术设计']"
               shape="round"
               class="tag"
+              v-model:checked="checked[1]"
             />
             <t-check-tag
               variant="light-outline"
@@ -32,6 +34,7 @@
               :content="['科技', '科技']"
               shape="round"
               class="tag"
+              v-model:checked="checked[2]"
             />
             <t-check-tag
               variant="light-outline"
@@ -39,6 +42,7 @@
               :content="['电商', '电商']"
               shape="round"
               class="tag"
+              v-model:checked="checked[3]"
             />
             <t-check-tag
               variant="light-outline"
@@ -46,6 +50,7 @@
               :content="['教育', '教育']"
               shape="round"
               class="tag"
+              v-model:checked="checked[4]"
             />
             <t-check-tag
               variant="light-outline"
@@ -53,6 +58,7 @@
               :content="['医疗健康', '医疗健康']"
               shape="round"
               class="tag"
+              v-model:checked="checked[5]"
             />
             <t-check-tag
               variant="light-outline"
@@ -60,6 +66,7 @@
               :content="['心理学', '心理学']"
               shape="round"
               class="tag"
+              v-model:checked="checked[6]"
             />
             <t-check-tag
               variant="light-outline"
@@ -67,6 +74,7 @@
               :content="['摄影', '摄影']"
               shape="round"
               class="tag"
+              v-model:checked="checked[7]"
             />
           </div>
         </div>
@@ -79,6 +87,7 @@
               :content="['讲座', '讲座']"
               shape="round"
               class="tag"
+              v-model:checked="checked[8]"
             />
             <t-check-tag
               variant="light-outline"
@@ -86,6 +95,7 @@
               :content="['展览', '展览']"
               shape="round"
               class="tag"
+              v-model:checked="checked[9]"
             />
             <t-check-tag
               variant="light-outline"
@@ -93,6 +103,7 @@
               :content="['工作坊', '工作坊']"
               shape="round"
               class="tag"
+              v-model:checked="checked[10]"
             />
           </div>
         </div>
@@ -116,11 +127,11 @@
           <div class="item_content" style="margin-top: 10px">
             <t-slider
               range
-              :default-value="[30, 50]"
+              v-model:value="rangeValue"
               :label="true"
               show-extreme-value
-              max="588"
-              min="0"
+              :max="max"
+              :min="min"
             />
           </div>
         </div>
@@ -137,8 +148,26 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, h } from 'vue';
+import { Toast } from 'tdesign-mobile-vue';
+import { ErrorCircleIcon } from 'tdesign-icons-vue-next';
 import moment from 'moment';
+let max = 588;
+let min = 0;
+let checked = ref([
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false
+]);
+let rangeValue = ref([30, 70]);
 // 弹出层的显示与隐藏
 let visible = ref(true);
 // 日历选择器的显示与隐藏
@@ -150,29 +179,51 @@ const dateValue = ref([today, tomorrow]);
 const date = ref(moment(today).format('YYYY年M月D日'));
 // 日历选择按钮的回调
 const handleConfirm = (val) => {
-  let y1 = moment(val[0]).format('YYYY');
-  let y2 = moment(val[0]).format('YYYY');
-  let start = moment(val[0]).format('YYYY年M月D日');
-  let end = '';
-  if (y1 === y2) {
-    end = moment(val[1]).format('M月D日');
+  if (val.length === 1) {
+    date.value = moment(val[0]).format('YYYY年M月D日');
   } else {
-    end = moment(val[1]).format('YYYY年M月D日');
+    let y1 = moment(val[0]).format('YYYY');
+    let y2 = moment(val[1]).format('YYYY');
+    let start = moment(val[0]).format('YYYY年M月D日');
+    let end = '';
+
+    if (y1 === y2) {
+      end = moment(val[1]).format('M月D日');
+    } else {
+      end = moment(val[1]).format('YYYY年M月D日');
+    }
+    date.value = start + '-' + end;
   }
-  date.value = start + '-' + end;
+  dateVisible.value = false;
 };
 // 重置按钮
-const onReset = () => {};
+const onReset = () => {
+  Object.assign(checked.value, [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ]);
+  date.value = moment(today).format('YYYY年M月D日');
+  rangeValue.value = [0, 0];
+};
 // 完成按钮
 const onComplete = () => {
   visible.value = false;
 };
-const close = ()=>{
-    $emit('changeVis', false)
-}
+const close = () => {
+  $emit('changeVis', false);
+};
 
 let prop = defineProps(['vis']);
-let $emit = defineEmits(['changeVis'])
+let $emit = defineEmits(['changeVis']);
 </script>
 <style scoped lang="less">
 .fil_header {
@@ -198,8 +249,11 @@ let $emit = defineEmits(['changeVis'])
 
     .item_choose {
       display: flex;
-      padding: 0 10px;
+      /* padding: 0 5px; */
       align-items: center;
+      .t-input::v-deep {
+        padding: 8px;
+      }
     }
     .item_title {
       font-size: 14px;
