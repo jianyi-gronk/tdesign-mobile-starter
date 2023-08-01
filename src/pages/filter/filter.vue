@@ -13,60 +13,14 @@
           <div class="item_title">面向领域</div>
           <div class="item_tag">
             <t-check-tag
+              v-for="item in fields"
+              :key="item.id"
               variant="light-outline"
               size="large"
-              :content="['IT互联网', 'IT互联网']"
+              :content="item.field"
               shape="round"
               class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['艺术设计', '艺术设计']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['科技', '科技']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['电商', '电商']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['教育', '教育']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['医疗健康', '医疗健康']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['心理学', '心理学']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['摄影', '摄影']"
-              shape="round"
-              class="tag"
+              v-model:checked="item.checked"
             />
           </div>
         </div>
@@ -74,25 +28,14 @@
           <div class="item_title">活动形式</div>
           <div class="item_tag">
             <t-check-tag
+              v-for="item in forms"
+              :key="item.id"
               variant="light-outline"
               size="large"
-              :content="['讲座', '讲座']"
+              :content="item.form"
               shape="round"
               class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['展览', '展览']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['工作坊', '工作坊']"
-              shape="round"
-              class="tag"
+              v-model:checked="item.checked"
             />
           </div>
         </div>
@@ -116,11 +59,11 @@
           <div class="item_content" style="margin-top: 10px">
             <t-slider
               range
-              :default-value="[30, 50]"
+              v-model:value="rangeValue"
               :label="true"
               show-extreme-value
-              max="588"
-              min="0"
+              :max="max"
+              :min="min"
             />
           </div>
         </div>
@@ -139,6 +82,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import moment from 'moment';
+import { getFields, getForms } from '../../api/filter.ts';
+const max = 588;
+const min = 0;
+let fields = ref([]);
+let forms = ref([]);
+
+let rangeValue = ref([30, 70]);
 // 弹出层的显示与隐藏
 let visible = ref(true);
 // 日历选择器的显示与隐藏
@@ -150,29 +100,56 @@ const dateValue = ref([today, tomorrow]);
 const date = ref(moment(today).format('YYYY年M月D日'));
 // 日历选择按钮的回调
 const handleConfirm = (val) => {
-  let y1 = moment(val[0]).format('YYYY');
-  let y2 = moment(val[0]).format('YYYY');
-  let start = moment(val[0]).format('YYYY年M月D日');
-  let end = '';
-  if (y1 === y2) {
-    end = moment(val[1]).format('M月D日');
+  if (val.length === 1) {
+    date.value = moment(val[0]).format('YYYY年M月D日');
   } else {
-    end = moment(val[1]).format('YYYY年M月D日');
+    let y1 = moment(val[0]).format('YYYY');
+    let y2 = moment(val[1]).format('YYYY');
+    let start = moment(val[0]).format('YYYY年M月D日');
+    let end = '';
+
+    if (y1 === y2) {
+      end = moment(val[1]).format('M月D日');
+    } else {
+      end = moment(val[1]).format('YYYY年M月D日');
+    }
+    date.value = start + '-' + end;
   }
-  date.value = start + '-' + end;
+  dateVisible.value = false;
 };
 // 重置按钮
-const onReset = () => {};
+const onReset = () => {
+  forms.value.forEach((element) => {
+    element.checked = false;
+  });
+  fields.value.forEach((element) => {
+    element.checked = false;
+  });
+  date.value = moment(today).format('YYYY年M月D日');
+  rangeValue.value = [0, 0];
+};
 // 完成按钮
 const onComplete = () => {
   visible.value = false;
 };
-const close = ()=>{
-    $emit('changeVis', false)
-}
-
+const close = () => {
+  $emit('changeVis', false);
+};
+const getData = async () => {
+  let res = await getFields();
+  if (res.code == 200) {
+    fields.value = res.data.data;
+  }
+  let res1 = await getForms();
+  if (res1.code === 200) {
+    forms.value = res1.data.data;
+  }
+};
+onMounted(() => {
+  getData();
+});
 let prop = defineProps(['vis']);
-let $emit = defineEmits(['changeVis'])
+let $emit = defineEmits(['changeVis']);
 </script>
 <style scoped lang="less">
 .fil_header {
@@ -198,8 +175,11 @@ let $emit = defineEmits(['changeVis'])
 
     .item_choose {
       display: flex;
-      padding: 0 10px;
+      /* padding: 0 5px; */
       align-items: center;
+      :deep(.t-input) {
+        padding: 8px;
+      }
     }
     .item_title {
       font-size: 14px;

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../pages/home/index.vue';
-//import User from '../pages/home/user/MyManagement.vue';
+// import User from '../pages/home/user/MyManagement.vue';
 import dateSelection from '../pages/dateSelection/index.vue';
 import regionSelection from '../pages/regionSelection/index.vue';
 import ApplicantInformation from '../pages/applicantInformation/index.vue';
@@ -9,7 +9,12 @@ import MyPage from '../pages/my/my.vue';
 import Filter from '../pages/filter/filter.vue';
 import EventDetails from '../pages/eventDetails/eventDetails.vue';
 import Location from '../pages/location/location.vue';
+<<<<<<< HEAD
 //import ActivityContent from '../pages/activityContent/activityInfo.vue';
+=======
+import Admin from '../pages/admin/index.vue';
+import DetailPage from '../pages/detailPage/index.vue';
+>>>>>>> 80885629bfc3462d30e30c3ad97627a52e1da39a
 
 const routes = [
   {
@@ -56,6 +61,16 @@ const routes = [
     path: '/purchaseResult',
     name: 'purchaseResult',
     component: purchaseResult
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: Admin
+  },
+  {
+    path: '/detail_page',
+    name: 'detailPage',
+    component: DetailPage
   }
 ];
 
