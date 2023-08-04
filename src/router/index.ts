@@ -8,6 +8,7 @@ import purchaseResult from '../pages/purchaseResult/index.vue';
 import MyPage from '../pages/my/my.vue';
 import EventDetails from '../pages/eventDetails/eventDetails.vue';
 import activityDetail from '../pages/detailPage/index.vue';
+import orderConfirm from '../pages/orderConfirmation/orderConfirm.vue';
 
 const routes = [
   {
@@ -49,6 +50,11 @@ const routes = [
     path: '/activityDetail',
     name: 'activityDetail',
     component: activityDetail
+  },
+  {
+    path: '/orderConfirm',
+    name: 'orderConfirm',
+    component: orderConfirm
   }
 ];
 
