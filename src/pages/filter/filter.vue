@@ -3,13 +3,16 @@
     <t-popup
       v-model="visible"
       placement="bottom"
-      style="padding: 10px"
+      style="padding: 10px; height: 83%"
       :closeBtn="true"
       :onClosed="close"
     >
       <div class="fil_header">全部筛选</div>
       <div class="fil_content">
-        <div class="fil_item">
+        <div
+          class="fil_item bb"
+          style="padding-top: 10px; padding-bottom: 23px"
+        >
           <div class="item_title">面向领域</div>
           <div class="item_tag">
             <t-check-tag
@@ -19,14 +22,13 @@
               size="large"
               :content="item.field"
               shape="round"
-              class="tag"
               v-model:checked="item.checked"
+              class="tag"
+              style="margin-bottom: 12px"
             />
           </div>
-        </div>
-        <div class="fil_item bb">
           <div class="item_title">活动形式</div>
-          <div class="item_tag">
+          <div class="item_tag" style="margin-bottom: 0">
             <t-check-tag
               v-for="item in forms"
               :key="item.id"
@@ -34,8 +36,8 @@
               size="large"
               :content="item.form"
               shape="round"
-              class="tag"
               v-model:checked="item.checked"
+              class="tag"
             />
           </div>
         </div>
@@ -48,14 +50,25 @@
               type="range"
               @confirm="handleConfirm"
             ></t-calendar>
-            <t-input v-model="date"></t-input>
-            <t-button theme="primary" variant="text" @click="dateVisible = true"
+            <t-input v-model="date" borderless></t-input>
+            <t-button
+              theme="primary"
+              variant="text"
+              @click="dateVisible = true"
+              style="
+                color: black;
+                background-color: #f3f3f3;
+                border-radius: 50px;
+                height: 30px;
+                width: 80px;
+                font-size: 14px;
+              "
               >选择日期</t-button
             >
           </div>
         </div>
         <div class="fil_item">
-          <div class="item_title">价格范围(元)</div>
+          <div class="item_title" style="margin-bottom: 0">价格范围(元)</div>
           <div class="item_content" style="margin-top: 10px">
             <t-slider
               range
@@ -160,6 +173,7 @@ let $emit = defineEmits(['changeVis']);
 }
 
 .fil_content {
+  padding: 0 8px;
   margin-top: 10px;
   width: 100%;
   height: 500px;
@@ -168,35 +182,40 @@ let $emit = defineEmits(['changeVis']);
   .bb {
     border-bottom: 0.5px solid #7f7f7f7f;
   }
+
   .fil_item {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    padding: 22px 0;
 
     .item_choose {
       display: flex;
-      /* padding: 0 5px; */
+
       align-items: center;
       :deep(.t-input) {
-        padding: 8px;
+        padding: 0px;
       }
     }
     .item_title {
       font-size: 14px;
       font-weight: 700;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
     .item_tag {
       width: 100%;
       margin-bottom: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 12px;
+      justify-content: space-between;
+      margin-top: 5px;
+      :deep(.t-tag__text) {
+        margin: auto;
+      }
+
       .tag {
-        width: 30%;
-        text-align: center;
-        margin: 0 5px;
-        display: inline-block;
-        height: 30px;
-        line-height: 30px;
-        margin-bottom: 13px;
+        width: 31%;
+        height: 40px;
       }
     }
     .item_content {
@@ -204,28 +223,40 @@ let $emit = defineEmits(['changeVis']);
     }
   }
 }
+:deep(.t-slider__value--max) {
+  margin-right: 5px;
+}
+:deep(.t-slider__range-extreme--min) {
+  margin-left: 5px;
+}
 .fil_footer {
   display: flex;
   justify-content: space-evenly;
+  margin-top: 25px;
 }
 .btn {
   font-size: 14px;
-  padding: 10px;
-  margin: 15px 0;
+  margin: 10px 0;
 }
 
 .btn--cancel {
-  color: #0052d9;
+  color: #0053db;
   border-radius: 5px;
-  width: 35%;
+  width: 45%;
+  height: 45px;
+  line-height: 45px;
   text-align: center;
+  background-color: #f3f3ff;
+  font-weight: 700;
 }
 
 .btn--confirm {
   color: white;
-  background-color: #0052d9;
+  background-color: #0053db;
   border-radius: 5px;
-  width: 35%;
+  width: 45%;
+  height: 45px;
+  line-height: 45px;
   text-align: center;
 }
 </style>
