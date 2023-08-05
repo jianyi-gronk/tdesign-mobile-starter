@@ -5,6 +5,7 @@
       placeholder="请输入您的职业"
       :value="careerState.career"
       @click="careerState.show = true"
+      readonly
     >
       <template #suffixIcon>
         <ChevronRightIcon />
