@@ -83,16 +83,7 @@ import SelectCareer from './selectCareer/index.vue';
 import { ref, reactive, onMounted } from 'vue';
 import { Message } from 'tdesign-mobile-vue';
 import { reqApplicantInfoData } from '../../api/activityInfo/applicantInfo';
-
-interface infoProps {
-  defaultState: boolean;
-  name: string;
-  birthday: string;
-  phone: string;
-  idCard: string;
-  email: string;
-  career: string;
-}
+import { infoProps } from './types';
 
 let applicantInfo = reactive<infoProps>({
   defaultState: true,
@@ -135,12 +126,12 @@ const changeDefaultState = () => {
 };
 
 // 保存选择生日子组件传来的值
-const addBirthday = (value: any) => {
+const addBirthday = (value: string) => {
   personalInfo.birthday = value;
 };
 
 // 保存选择职业子组件传来的值
-const addCareer = (value: any) => {
+const addCareer = (value: string) => {
   personalInfo.career = value;
 };
 
