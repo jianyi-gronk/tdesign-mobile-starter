@@ -39,8 +39,8 @@ const routes = [
     component: Location
   },
   {
-    path: '/applicant_information',
-    name: 'ApplicantInformation',
+    path: '/applicantInformation',
+    name: 'applicantInformation',
     component: ApplicantInformation
   },
   {
