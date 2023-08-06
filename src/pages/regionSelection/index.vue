@@ -1,5 +1,6 @@
 <template>
-  <t-navbar title="选择城市" :fixed="false" left-arrow> </t-navbar>
+  <t-navbar title="选择城市" :fixed="false" left-arrow @left-click="handleLeft">
+  </t-navbar>
   <div class="location">
     <t-navbar :fixed="false">
       <template #left>
@@ -40,6 +41,8 @@
 <script setup lang="ts">
 import { Ref, ref, onMounted, reactive } from 'vue';
 import { reqRegionData } from '../../api/region';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 // import { type } from 'os';
 const curIndex: Ref<number | string> = ref('');
 const change = (index: number | string) => {
@@ -182,6 +185,9 @@ const list = [
     children: ['昆明', '开封', '康定', '喀什']
   }
 ];
+const handleLeft = () => {
+  router.back();
+};
 // const indexList = list.map((item) => item.index);
 </script>
 <style scoped lang="less">

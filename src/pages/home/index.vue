@@ -210,7 +210,7 @@ const handleFilterClick = () => {
 };
 //地区跳转
 const handleLocationClick = () => {
-  router.push('/location');
+  router.push('/regionSelection');
 };
 </script>
 
