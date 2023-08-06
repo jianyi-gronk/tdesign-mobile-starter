@@ -3,95 +3,40 @@
     <t-popup
       v-model="visible"
       placement="bottom"
-      style="padding: 10px"
+      style="padding: 10px; height: 83%"
       :closeBtn="true"
       :onClosed="close"
     >
       <div class="fil_header">全部筛选</div>
       <div class="fil_content">
-        <div class="fil_item">
+        <div
+          class="fil_item bb"
+          style="padding-top: 10px; padding-bottom: 23px"
+        >
           <div class="item_title">面向领域</div>
           <div class="item_tag">
             <t-check-tag
+              v-for="item in fields"
+              :key="item.id"
               variant="light-outline"
               size="large"
-              :content="['IT互联网', 'IT互联网']"
+              :content="item.field"
               shape="round"
+              v-model:checked="item.checked"
               class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['艺术设计', '艺术设计']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['科技', '科技']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['电商', '电商']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['教育', '教育']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['医疗健康', '医疗健康']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['心理学', '心理学']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['摄影', '摄影']"
-              shape="round"
-              class="tag"
+              style="margin-bottom: 12px"
             />
           </div>
-        </div>
-        <div class="fil_item bb">
           <div class="item_title">活动形式</div>
-          <div class="item_tag">
+          <div class="item_tag" style="margin-bottom: 0">
             <t-check-tag
+              v-for="item in forms"
+              :key="item.id"
               variant="light-outline"
               size="large"
-              :content="['讲座', '讲座']"
+              :content="item.form"
               shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['展览', '展览']"
-              shape="round"
-              class="tag"
-            />
-            <t-check-tag
-              variant="light-outline"
-              size="large"
-              :content="['工作坊', '工作坊']"
-              shape="round"
+              v-model:checked="item.checked"
               class="tag"
             />
           </div>
@@ -105,22 +50,33 @@
               type="range"
               @confirm="handleConfirm"
             ></t-calendar>
-            <t-input v-model="date"></t-input>
-            <t-button theme="primary" variant="text" @click="dateVisible = true"
+            <t-input v-model="date" borderless></t-input>
+            <t-button
+              theme="primary"
+              variant="text"
+              @click="dateVisible = true"
+              style="
+                color: black;
+                background-color: #f3f3f3;
+                border-radius: 50px;
+                height: 30px;
+                width: 80px;
+                font-size: 14px;
+              "
               >选择日期</t-button
             >
           </div>
         </div>
         <div class="fil_item">
-          <div class="item_title">价格范围(元)</div>
+          <div class="item_title" style="margin-bottom: 0">价格范围(元)</div>
           <div class="item_content" style="margin-top: 10px">
             <t-slider
               range
-              :default-value="[30, 50]"
+              v-model:value="rangeValue"
               :label="true"
               show-extreme-value
-              max="588"
-              min="0"
+              :max="max"
+              :min="min"
             />
           </div>
         </div>
@@ -139,6 +95,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import moment from 'moment';
+import { getFields, getForms } from '../../api/filter.ts';
+const max = 588;
+const min = 0;
+let fields = ref([]);
+let forms = ref([]);
+
+let rangeValue = ref([30, 70]);
 // 弹出层的显示与隐藏
 let visible = ref(true);
 // 日历选择器的显示与隐藏
@@ -150,29 +113,56 @@ const dateValue = ref([today, tomorrow]);
 const date = ref(moment(today).format('YYYY年M月D日'));
 // 日历选择按钮的回调
 const handleConfirm = (val) => {
-  let y1 = moment(val[0]).format('YYYY');
-  let y2 = moment(val[0]).format('YYYY');
-  let start = moment(val[0]).format('YYYY年M月D日');
-  let end = '';
-  if (y1 === y2) {
-    end = moment(val[1]).format('M月D日');
+  if (val.length === 1) {
+    date.value = moment(val[0]).format('YYYY年M月D日');
   } else {
-    end = moment(val[1]).format('YYYY年M月D日');
+    let y1 = moment(val[0]).format('YYYY');
+    let y2 = moment(val[1]).format('YYYY');
+    let start = moment(val[0]).format('YYYY年M月D日');
+    let end = '';
+
+    if (y1 === y2) {
+      end = moment(val[1]).format('M月D日');
+    } else {
+      end = moment(val[1]).format('YYYY年M月D日');
+    }
+    date.value = start + '-' + end;
   }
-  date.value = start + '-' + end;
+  dateVisible.value = false;
 };
 // 重置按钮
-const onReset = () => {};
+const onReset = () => {
+  forms.value.forEach((element) => {
+    element.checked = false;
+  });
+  fields.value.forEach((element) => {
+    element.checked = false;
+  });
+  date.value = moment(today).format('YYYY年M月D日');
+  rangeValue.value = [0, 0];
+};
 // 完成按钮
 const onComplete = () => {
   visible.value = false;
 };
-const close = ()=>{
-    $emit('changeVis', false)
-}
-
+const close = () => {
+  $emit('changeVis', false);
+};
+const getData = async () => {
+  let res = await getFields();
+  if (res.code == 200) {
+    fields.value = res.data.data;
+  }
+  let res1 = await getForms();
+  if (res1.code === 200) {
+    forms.value = res1.data.data;
+  }
+};
+onMounted(() => {
+  getData();
+});
 let prop = defineProps(['vis']);
-let $emit = defineEmits(['changeVis'])
+let $emit = defineEmits(['changeVis']);
 </script>
 <style scoped lang="less">
 .fil_header {
@@ -183,6 +173,7 @@ let $emit = defineEmits(['changeVis'])
 }
 
 .fil_content {
+  padding: 0 8px;
   margin-top: 10px;
   width: 100%;
   height: 500px;
@@ -191,32 +182,40 @@ let $emit = defineEmits(['changeVis'])
   .bb {
     border-bottom: 0.5px solid #7f7f7f7f;
   }
+
   .fil_item {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    padding: 22px 0;
 
     .item_choose {
       display: flex;
-      padding: 0 10px;
+
       align-items: center;
+      :deep(.t-input) {
+        padding: 0px;
+      }
     }
     .item_title {
       font-size: 14px;
       font-weight: 700;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
     .item_tag {
       width: 100%;
       margin-bottom: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 12px;
+      justify-content: space-between;
+      margin-top: 5px;
+      :deep(.t-tag__text) {
+        margin: auto;
+      }
+
       .tag {
-        width: 30%;
-        text-align: center;
-        margin: 0 5px;
-        display: inline-block;
-        height: 30px;
-        line-height: 30px;
-        margin-bottom: 13px;
+        width: 31%;
+        height: 40px;
       }
     }
     .item_content {
@@ -224,28 +223,40 @@ let $emit = defineEmits(['changeVis'])
     }
   }
 }
+:deep(.t-slider__value--max) {
+  margin-right: 5px;
+}
+:deep(.t-slider__range-extreme--min) {
+  margin-left: 5px;
+}
 .fil_footer {
   display: flex;
   justify-content: space-evenly;
+  margin-top: 25px;
 }
 .btn {
   font-size: 14px;
-  padding: 10px;
-  margin: 15px 0;
+  margin: 10px 0;
 }
 
 .btn--cancel {
-  color: #0052d9;
+  color: #0053db;
   border-radius: 5px;
-  width: 35%;
+  width: 45%;
+  height: 45px;
+  line-height: 45px;
   text-align: center;
+  background-color: #f3f3ff;
+  font-weight: 700;
 }
 
 .btn--confirm {
   color: white;
-  background-color: #0052d9;
+  background-color: #0053db;
   border-radius: 5px;
-  width: 35%;
+  width: 45%;
+  height: 45px;
+  line-height: 45px;
   text-align: center;
 }
 </style>
