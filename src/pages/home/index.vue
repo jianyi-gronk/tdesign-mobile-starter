@@ -87,7 +87,7 @@
                   <LatestActivity v-if="currentTab === 'first'" />
                 </template>
               </t-tab-panel>
-              <t-tab-panel value="second">
+              <t-tab-panel value="second" @click="handleActivityDetailClick">
                 <template #label>
                   <div class="label-content">
                     <!-- <icon-font name="app" size="large" /> -->
@@ -211,6 +211,11 @@ const handleFilterClick = () => {
 //地区跳转
 const handleLocationClick = () => {
   router.push('/location');
+};
+
+//高分活动详情页跳转
+const handleActivityDetailClick = () => {
+  router.push('/activityDetail');
 };
 </script>
 

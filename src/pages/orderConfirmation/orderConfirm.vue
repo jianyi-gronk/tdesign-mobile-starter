@@ -20,21 +20,31 @@
             >
           </div>
           <div class="person-list">
-            <t-checkbox-group v-model:value="value1" class="horizontal-box">
+            <t-checkbox-group
+              v-model:value="personOptions"
+              class="horizontal-box"
+            >
               <div
-                v-for="n in 2"
-                :key="n"
+                v-for="person in personList"
+                :key="person.id"
                 :class="`card ${
-                  value1.indexOf(n) > -1 ? 'card--active' : value1.indexOf(n)
+                  personOptions.indexOf(person.name) > -1
+                    ? 'card--active'
+                    : personOptions.indexOf(person.name)
                 }`"
               >
                 <t-icon
-                  v-if="value1.indexOf(n) > -1"
+                  v-if="personOptions.indexOf(person.name) > -1"
                   name="check"
                   class="card__icon"
                   :aria-hidden="true"
                 />
-                <t-checkbox :value="n" label="蔡宣轩" icon="none" borderless />
+                <t-checkbox
+                  :value="person.name"
+                  :label="person.name"
+                  icon="none"
+                  borderless
+                />
               </div>
             </t-checkbox-group>
           </div>
@@ -98,7 +108,9 @@
     <div class="purchase-confirm">
       <div class="price-text">待支付:<span class="price">¥88</span></div>
       <div class="btn">
-        <t-button size="large" theme="primary" block>确认购买</t-button>
+        <t-button size="large" theme="primary" block @click="goToPurchaseResult"
+          >确认购买</t-button
+        >
       </div>
     </div>
   </div>
@@ -107,11 +119,20 @@
 <script setup lang="ts">
 import Navigator from './Navigator.vue';
 import { ref } from 'vue';
-
 import { Icon as TIcon } from 'tdesign-icons-vue-next';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
+const personOptions = ref<Array<string>>(['蔡宣轩']);
+const personList = ref([
+  { id: 1, name: '蔡宣轩' },
+  { id: 2, name: '蔡晓萱' }
+]);
 const value = ref([1, 2]);
-const value1 = ref([1, 2]);
+
+function goToPurchaseResult() {
+  router.push('/PurchaseResult');
+}
 </script>
 
 <style scoped lang="less">

@@ -1,46 +1,48 @@
 <template>
-  <div class="actionPage">
-    <div class="down-container">
-      <div class="down" @click.stop="handleHidden">
-        <t-icon name="chevron-down" size="25px" class="down-icon" />
-      </div>
-    </div>
-    <transition name="down">
-      <div class="indexOne" ref="indexOne">
-        <div class="content">
-          <div class="title-avatars">
-            <div class="title">2021 SICC服务设计创新大会</div>
-            <div class="avatars">
-              <img
-                v-for="item in avatars"
-                :key="item.id"
-                :src="getImagePath(item.name)"
-                alt=""
-                :class="{ moveLeft: item.id > 1 }"
-              />
-              <div class="circle">99+</div>
-              <div class="peoples">236人感兴趣</div>
-            </div>
-          </div>
-          <div class="time-place">
-            <div class="time">
-              <t-icon name="time" class="time-place-Icon" size="20px" />
-              <span>时间：2021年3月16日</span>
-            </div>
-            <div class="place">
-              <t-icon name="location" class="time-place-Icon" size="20px" />
-              <span>地点：深圳市腾讯滨海大厦</span>
-              <t-button size="large" theme="light" class="navigator"
-                >导航</t-button
-              >
-            </div>
-          </div>
-          <Comment />
-          <Introduce />
+  <transition name="down">
+    <div class="actionPage" :class="{ downActive: !isShow }" v-show="isShow">
+      <div class="down-container">
+        <div class="down" @click.stop="handleHidden">
+          <t-icon name="chevron-down" size="25px" class="down-icon" />
         </div>
       </div>
-    </transition>
-  </div>
+      <div class="container-one" ref="container_one">
+        <div class="indexOne">
+          <div class="content">
+            <div class="title-avatars">
+              <div class="title">2021 SICC服务设计创新大会</div>
+              <div class="avatars">
+                <img
+                  v-for="item in avatars"
+                  :key="item.id"
+                  :src="getImagePath(item.name)"
+                  alt=""
+                  :class="{ moveLeft: item.id > 1 }"
+                />
+                <div class="circle">99+</div>
+                <div class="peoples">236人感兴趣</div>
+              </div>
+            </div>
+            <div class="time-place">
+              <div class="time">
+                <t-icon name="time" class="time-place-Icon" size="20px" />
+                <span>时间：2021年3月16日</span>
+              </div>
+              <div class="place">
+                <t-icon name="location" class="time-place-Icon" size="20px" />
+                <span>地点：深圳市腾讯滨海大厦</span>
+                <t-button size="large" theme="light" class="navigator"
+                  >导航</t-button
+                >
+              </div>
+            </div>
+            <Comment />
+            <Introduce />
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script setup lang="ts">
@@ -56,19 +58,17 @@ const avatars: Array<Avatar> = [
   { name: 'Jacky', id: 2 },
   { name: 'Eric', id: 3 },
   { name: 'Johnson', id: 4 },
-  { name: 'Allen', id: 5 },
+  { name: 'Allen', id: 5 }
 ];
 function getImagePath(imageName: string) {
   // 使用 new URL 动态引入图片
   return new URL(`../../../assets/avatars/${imageName}.png`, import.meta.url)
     .href;
 }
-let isShow = ref(true);
-const indexOne = ref();
+let isShow = ref<boolean>(true);
+const container_one = ref();
 function handleHidden() {
-  console.log(indexOne);
-  indexOne.value.classList.add('down-active');
-  console.log(indexOne);
+  container_one.value.classList.add('downActive');
   isShow.value = false;
 }
 </script>
@@ -210,16 +210,36 @@ function handleHidden() {
     }
   }
 }
+
+.container-one {
+  height: 546px;
+  overflow: auto;
+  //此伪元素只适用于chrome，具有兼容性问题
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .moveLeft {
   margin-left: -12px;
 }
 
 //动画效果
-.down-active {
-  height: 100px;
-  width: 375px;
-  position: absolute;
-  bottom: 80px;
-  background-color: #fff;
+.down-leave-active {
+  animation: leave 2s;
+}
+
+@keyframes leave {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+.down-leave-to {
+  animation: leave 2s;
 }
 </style>
