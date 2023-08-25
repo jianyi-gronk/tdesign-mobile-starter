@@ -8,7 +8,7 @@
         <t-avatar
           size="large"
           class="avatar-example"
-          :image="user_info.img"
+          image="https://tdesign.gtimg.com/mobile/demos/avatar_1.png"
         ></t-avatar>
         <div class="right">
           <div class="user_name">{{ user_info.userName }}</div>
@@ -40,12 +40,31 @@
         </t-tab-panel>
       </t-tabs>
     </div>
+    <t-tab-bar
+      class="bottom-tab-bar"
+      v-model="tabValue"
+      theme="tag"
+      :split="false"
+    >
+      <t-tab-bar-item
+        v-for="item in tabList"
+        :key="item.value"
+        :value="item.value"
+        @click="handleTabClick(item.value)"
+      >
+        {{ item.label }}
+        <template #icon>
+          <t-icon :name="item.icon" />
+        </template>
+      </t-tab-bar-item>
+    </t-tab-bar>
   </div>
 </template>
 
 <script setup lang="ts">
 import { EditIcon } from 'tdesign-icons-vue-next';
-import { onMounted, reactive, ref } from 'vue';
+import { nextTick, onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import Mycard from '../../components/MyCard.vue';
 import { reqActivityInfo } from '../../api/activity';
 const currentValue = ref('0');
@@ -56,7 +75,7 @@ interface myInfo {
   img: string;
 }
 
-let user_info = reactive<myInfo>({
+let user_info = ref<myInfo>({
   userName: '',
   age: 0,
   position: '',
@@ -65,7 +84,7 @@ let user_info = reactive<myInfo>({
 
 async function getMyInfo() {
   const result = await reqActivityInfo('/myInfo');
-  user_info = result.data.MyInfo;
+  user_info.value = result.data.MyInfo;
 }
 
 interface cardInfoProps {
@@ -81,7 +100,7 @@ interface cardInfoProps {
   ];
 }
 
-let activities = reactive<cardInfoProps>({
+let activities = ref<cardInfoProps>({
   label: '',
   data: [
     {
@@ -93,7 +112,7 @@ let activities = reactive<cardInfoProps>({
     }
   ]
 });
-let finished = reactive<cardInfoProps>({
+let finished = ref<cardInfoProps>({
   label: '',
   data: [
     {
@@ -105,7 +124,7 @@ let finished = reactive<cardInfoProps>({
     }
   ]
 });
-let wait = reactive<cardInfoProps>({
+let wait = ref<cardInfoProps>({
   label: '',
   data: [
     {
@@ -120,17 +139,17 @@ let wait = reactive<cardInfoProps>({
 
 async function getAllActivity() {
   const result = await reqActivityInfo('/allActivitives');
-  activities = result.data.allActivitives;
+  activities.value = result.data.allActivitives;
 }
 
 async function getFinishedActivity() {
   const result = await reqActivityInfo('/finishActivity');
-  finished = result.data.finishActivity;
+  finished.value = result.data.finishActivity;
 }
 
 async function getAwaitActivity() {
   const result = await reqActivityInfo('/awaitActivity');
-  wait = result.data.awaitActivity;
+  wait.value = result.data.awaitActivity;
 }
 
 onMounted(() => {
@@ -142,6 +161,22 @@ onMounted(() => {
 
 const onChange = (value: string) => {
   currentValue.value = value;
+};
+
+//标签栏
+const tabValue = ref('label_2');
+const tabList = ref([
+  { value: 'label_1', label: '首页', icon: 'home', path: '/' },
+  { value: 'label_2', label: '我的', icon: 'user', path: '/my' }
+]);
+//标签栏跳转
+const router = useRouter();
+const handleTabClick = (value: string) => {
+  if (value === 'label_1') {
+    router.push('/');
+  } else if (value === 'label_2') {
+    router.push('/admin');
+  }
 };
 </script>
 
