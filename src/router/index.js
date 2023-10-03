@@ -5,16 +5,12 @@ import dateSelection from '../pages/dateSelection/index.vue';
 import regionSelection from '../pages/regionSelection/index.vue';
 import ApplicantInformation from '../pages/applicantInformation/index.vue';
 import purchaseResult from '../pages/purchaseResult/index.vue';
-import MyPage from '../pages/my/my.vue';
+//import MyPage from '../pages/my/my.vue';
 import Filter from '../pages/filter/filter.vue';
 import EventDetails from '../pages/eventDetails/eventDetails.vue';
-import Location from '../pages/location/location.vue';
-<<<<<<< HEAD
-//import ActivityContent from '../pages/activityContent/activityInfo.vue';
-=======
+//import Location from '../pages/location/location.vue';
 import Admin from '../pages/admin/index.vue';
 import DetailPage from '../pages/detailPage/index.vue';
->>>>>>> 80885629bfc3462d30e30c3ad97627a52e1da39a
 
 const routes = [
   {
@@ -23,9 +19,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/my',
-    name: 'My',
-    component: MyPage
+    path: '/index',
+    name: 'Index',
+    component: Admin
   },
   {
     path: '/filter',
@@ -36,11 +32,6 @@ const routes = [
     path: '/eventDetails',
     name: 'EventDetails',
     component: EventDetails
-  },
-  {
-    path: '/location',
-    name: 'location',
-    component: Location
   },
   {
     path: '/applicant_information',
