@@ -6,6 +6,7 @@
       placeholder="请输入您的生日"
       :value="pickerBirthdayValueText"
       @click="visibleBirthday = true"
+      readonly
     >
       <template #suffixIcon>
         <CalendarIcon />

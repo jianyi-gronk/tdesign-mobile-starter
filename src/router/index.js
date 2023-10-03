@@ -34,8 +34,13 @@ const routes = [
     component: EventDetails
   },
   {
-    path: '/applicant_information',
-    name: 'ApplicantInformation',
+    path: '/location',
+    name: 'location',
+    component: Location
+  },
+  {
+    path: '/applicantInformation',
+    name: 'applicantInformation',
     component: ApplicantInformation
   },
   {

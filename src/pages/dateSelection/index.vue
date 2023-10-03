@@ -72,7 +72,7 @@ const valueSearch = ref('');
 .example-search {
   background-color: #fff;
   padding: 6px 16px;
-  // margin-top: 0.5333rem;
+  margin-top: 0.5333rem;
 }
 
 .calendar {
