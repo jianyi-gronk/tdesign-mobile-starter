@@ -84,6 +84,8 @@ import { ref, reactive, onMounted } from 'vue';
 import { Message } from 'tdesign-mobile-vue';
 import { reqApplicantInfoData } from '../../api/activityInfo/applicantInfo';
 import { infoProps } from './types';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 let applicantInfo = reactive<infoProps>({
   defaultState: true,
@@ -117,7 +119,7 @@ let personalInfo = reactive<infoProps>({
 
 // 返回按钮事件
 const handleReturnClick = () => {
-  console.log('返回按钮事件');
+  router.back();
 };
 
 // 改变默认设置事件

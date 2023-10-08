@@ -6,7 +6,7 @@
     </div>
     <actionPage />
   </div>
-  <div class="purchase">
+  <div class="purchase" @click="handlePurchase">
     <Purchase />
   </div>
 </template>
@@ -15,6 +15,12 @@
 import Navigator from './Navigator.vue';
 import actionPage from './actionPage/index.vue';
 import Purchase from './Purchase.vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+const handlePurchase = () => {
+  console.log(1111);
+  router.push('/purchaseResult');
+};
 </script>
 
 <style scoped lang="less">

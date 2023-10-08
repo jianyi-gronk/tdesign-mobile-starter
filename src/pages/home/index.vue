@@ -126,24 +126,7 @@
       </div>
       <!-- <div class="other-content" v-for="i in 50" :key="i"></div> -->
     </div>
-    <t-tab-bar
-      class="bottom-tab-bar"
-      v-model="tabValue"
-      theme="tag"
-      :split="false"
-    >
-      <t-tab-bar-item
-        v-for="item in tabList"
-        :key="item.value"
-        :value="item.value"
-        @click="handleTabClick(item.value)"
-      >
-        {{ item.label }}
-        <template #icon>
-          <t-icon :name="item.icon" />
-        </template>
-      </t-tab-bar-item>
-    </t-tab-bar>
+    <HomeBottom />
   </div>
 </template>
 
@@ -153,6 +136,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import LatestActivity from './LatestActivities.vue';
 import HighScoreActivity from './HighScoreActivities.vue';
+import HomeBottom from '../../components/homeBottom.vue';
 // 引入首页筛选组件
 import Filter from '../filter/filter.vue';
 //import { Icon as TIcon } from 'tdesign-icons-vue-next';
@@ -171,23 +155,7 @@ const swiperList = [
   `${imageCdn}/swiper2.png`,
   `${imageCdn}/swiper1.png`
 ];
-//标签栏
-const tabValue = ref('label_1');
-const tabList = ref([
-  { value: 'label_1', label: '首页', icon: 'home', path: '/' },
-  { value: 'label_2', label: '我的', icon: 'user', path: '/my' }
-]);
-//标签栏跳转
 const router = useRouter();
-const handleTabClick = (value: string) => {
-  if (value === 'label_1') {
-    router.push('/');
-    //console.log('1')
-  } else if (value === 'label_2') {
-    router.push('/admin');
-    //console.log('2')
-  }
-};
 //活动跳转
 const currentTab = ref('first');
 const switchTab = (value: string) => {
