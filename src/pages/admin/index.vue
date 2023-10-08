@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="edit_info">
-          <EditIcon size="large" class="edit_icon" />
+          <EditIcon size="large" class="edit_icon" @click="handleEdit" />
         </div>
       </div>
       <t-tabs :default-value="currentValue" @change="onChange" class="tab">
@@ -40,6 +40,7 @@
         </t-tab-panel>
       </t-tabs>
     </div>
+    <HomeBottom />
   </div>
 </template>
 
@@ -48,6 +49,8 @@ import { EditIcon } from 'tdesign-icons-vue-next';
 import { onMounted, reactive, ref } from 'vue';
 import Mycard from '../../components/MyCard.vue';
 import { reqActivityInfo } from '../../api/activityInfo/activity';
+import HomeBottom from '../../components/homeBottom.vue';
+import router from '../../router';
 const currentValue = ref('0');
 interface myInfo {
   userName: string;
@@ -142,6 +145,10 @@ onMounted(() => {
 
 const onChange = (value: string) => {
   currentValue.value = value;
+};
+
+const handleEdit = () => {
+  router.push('/applicantInformation');
 };
 </script>
 

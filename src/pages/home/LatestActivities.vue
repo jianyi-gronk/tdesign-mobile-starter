@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <div class="other-content" v-for="i in 10" :key="i"></div> -->
-    <div class="container" style="width: 375px">
+    <div class="container" style="width: 375px" @click="handleClick">
       <div class="other-content">
         <t-image
           :src="imageUrl"
@@ -15,7 +15,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import Image from '/src/assets/Image3.png';
+import { useRouter } from 'vue-router';
 const imageUrl = ref(Image);
+//内容跳转
+const router = useRouter();
+const handleClick = () => {
+  router.push('/detail_page');
+};
 </script>
 <style scoped>
 .rounded-image {

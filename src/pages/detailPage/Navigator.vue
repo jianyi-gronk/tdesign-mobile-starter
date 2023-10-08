@@ -1,12 +1,18 @@
 <template>
-  <t-navbar title="详情" :fixed="false" left-arrow>
+  <t-navbar title="详情" :fixed="false" left-arrow @left-click="handleLeft">
     <template #right>
       <t-icon name="ellipsis" size="24px" />
     </template>
   </t-navbar>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRouter } from 'vue-router';
+const router = useRouter();
+const handleLeft = () => {
+  router.back();
+};
+</script>
 
 <style scoped lang="less">
 .t-navbar {

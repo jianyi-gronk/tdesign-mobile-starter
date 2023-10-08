@@ -50,7 +50,7 @@ const value3 = ref(4.5);
 //内容跳转
 const router = useRouter();
 const handleClick = () => {
-  router.push('/eventDetails');
+  router.push('/detail_page');
 };
 </script>
 <style scoped>
